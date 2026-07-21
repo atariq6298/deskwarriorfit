@@ -1,14 +1,1343 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DeskWarriorFit</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeskWarriorFit — Fitness for Desk Workers</title>
+  <meta name="description" content="Built for people who sit 8 hours a day. DeskWarriorFit gives desk workers the tools to move, recover, and fuel — without quitting their job.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: #0d1209;
+      color: #ede8df;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #2d3d21; border-radius: 2px; }
+    ::-webkit-scrollbar-thumb:hover { background: #4a5e35; }
+
+    a { text-decoration: none; }
+
+    /* ── Navigation ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background-color: rgba(13,18,9,0.93);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid #2d3d21;
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo-badge {
+      width: 32px;
+      height: 32px;
+      background-color: #c8f23a;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .nav-logo-badge span {
+      font-family: 'DM Mono', monospace;
+      font-weight: 500;
+      font-size: 13px;
+      color: #0d1209;
+    }
+
+    .nav-logo-name {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: -0.02em;
+      color: #ede8df;
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 36px;
+    }
+
+    .nav-link {
+      color: #7a9464;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover { color: #ede8df; }
+
+    .btn-primary {
+      background-color: #c8f23a;
+      color: #0d1209;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      transition: opacity 0.2s;
+    }
+
+    .btn-primary:hover { opacity: 0.85; }
+
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background-color: #ede8df;
+      border-radius: 1px;
+      transition: all 0.2s;
+    }
+
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translateY(7px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translateY(-7px); }
+
+    .mobile-menu {
+      display: none;
+      background-color: #141a0f;
+      border-top: 1px solid #2d3d21;
+      padding: 16px 24px 24px;
+    }
+
+    .mobile-menu.open { display: block; }
+
+    .mobile-menu a {
+      display: block;
+      color: #ede8df;
+      padding: 12px 0;
+      font-size: 16px;
+      font-weight: 500;
+      border-bottom: 1px solid #1e2a14;
+    }
+
+    .mobile-menu .btn-start {
+      display: block;
+      background-color: #c8f23a;
+      color: #0d1209;
+      padding: 13px 20px;
+      border-radius: 9px;
+      font-size: 15px;
+      font-weight: 700;
+      text-align: center;
+      margin-top: 16px;
+    }
+
+    /* ── Hero ── */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: calc(100vh - 64px);
+      overflow: hidden;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(48px, 8vw, 96px) clamp(24px, 4vw, 64px);
+    }
+
+    .label-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: #c8f23a;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .label-tag::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 1px;
+      background-color: #c8f23a;
+    }
+
+    h1 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(52px, 7.5vw, 96px);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -0.035em;
+      margin-bottom: 28px;
+    }
+
+    .accent { color: #c8f23a; font-style: italic; }
+
+    .hero-desc {
+      font-size: clamp(15px, 1.4vw, 18px);
+      line-height: 1.65;
+      color: #7a9464;
+      margin-bottom: 40px;
+      max-width: 440px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-hero-primary {
+      background-color: #c8f23a;
+      color: #0d1209;
+      padding: 15px 30px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s;
+    }
+
+    .btn-hero-primary:hover { transform: translateY(-2px); }
+
+    .btn-hero-secondary {
+      color: #ede8df;
+      padding: 15px 24px;
+      font-size: 15px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid #2d3d21;
+      border-radius: 10px;
+      transition: border-color 0.2s;
+    }
+
+    .btn-hero-secondary:hover { border-color: #7a9464; }
+
+    .hero-stats {
+      display: flex;
+      gap: 36px;
+      margin-top: 56px;
+      padding-top: 32px;
+      border-top: 1px solid #2d3d21;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat-value {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: #c8f23a;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-stat-label {
+      font-size: 12px;
+      color: #7a9464;
+      margin-top: 2px;
+    }
+
+    .hero-image-col {
+      position: relative;
+      background-color: #141a0f;
+      overflow: hidden;
+      min-height: 480px;
+    }
+
+    .hero-image-col img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: brightness(0.7) saturate(0.85);
+      position: absolute;
+      inset: 0;
+    }
+
+    .hero-image-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, #0d1209 0%, transparent 35%), linear-gradient(to top, #0d1209 0%, transparent 45%);
+    }
+
+    .hero-checkin {
+      position: absolute;
+      bottom: 36px;
+      right: 28px;
+      background-color: rgba(13,18,9,0.9);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid #2d3d21;
+      border-radius: 12px;
+      padding: 18px 22px;
+      min-width: 210px;
+    }
+
+    .checkin-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: #c8f23a;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .checkin-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #ede8df;
+      margin-bottom: 12px;
+    }
+
+    .progress-bar-bg {
+      height: 4px;
+      background-color: #2d3d21;
+      border-radius: 2px;
+    }
+
+    .progress-bar-fill {
+      width: 72%;
+      height: 100%;
+      background-color: #c8f23a;
+      border-radius: 2px;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 6px;
+    }
+
+    .progress-meta span:first-child { font-size: 11px; color: #7a9464; }
+    .progress-meta span:last-child { font-family: 'DM Mono', monospace; font-size: 11px; color: #c8f23a; }
+
+    /* ── Marquee ── */
+    .marquee-strip {
+      background-color: #c8f23a;
+      padding: 14px 0;
+      overflow: hidden;
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 56px;
+      white-space: nowrap;
+      width: max-content;
+      animation: marquee 22s linear infinite;
+    }
+
+    .marquee-item {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #0d1209;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .marquee-item::after {
+      content: '◆';
+      opacity: 0.35;
+      font-size: 9px;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-33.333%); }
+    }
+
+    /* ── Section shared ── */
+    .section {
+      padding: clamp(64px, 8vw, 112px) 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: #c8f23a;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .section-label.mb16 { margin-bottom: 16px; }
+
+    h2 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+    }
+
+    /* ── Problem ── */
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(40px, 6vw, 96px);
+      align-items: center;
+    }
+
+    .problem-h2 {
+      font-size: clamp(36px, 4.5vw, 60px);
+      margin-bottom: 24px;
+    }
+
+    .problem-text {
+      font-size: 16px;
+      line-height: 1.72;
+      color: #7a9464;
+      margin-bottom: 16px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .stat-card {
+      background-color: #141a0f;
+      border: 1px solid #2d3d21;
+      border-radius: 14px;
+      padding: 24px 20px;
+    }
+
+    .stat-value {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 44px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: #7a9464;
+      line-height: 1.4;
+    }
+
+    /* ── Pillars ── */
+    .pillars-section {
+      padding: clamp(64px, 8vw, 96px) 24px;
+      background-color: #141a0f;
+      border-top: 1px solid #2d3d21;
+      border-bottom: 1px solid #2d3d21;
+    }
+
+    .pillars-inner { max-width: 1200px; margin: 0 auto; }
+
+    .pillars-header {
+      margin-bottom: 56px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .pillars-h2 {
+      font-size: clamp(30px, 4vw, 50px);
+      line-height: 1.08;
+    }
+
+    .view-all {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      color: #7a9464;
+      border-bottom: 1px solid #2d3d21;
+      padding-bottom: 2px;
+      transition: color 0.2s;
+    }
+
+    .view-all:hover { color: #ede8df; }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .pillar-card {
+      background-color: #0d1209;
+      border: 1px solid #2d3d21;
+      border-radius: 16px;
+      padding: clamp(24px, 3vw, 40px) clamp(20px, 2.5vw, 32px);
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .pillar-card:hover {
+      border-color: #c8f23a;
+      transform: translateY(-4px);
+    }
+
+    .pillar-card:hover .pillar-icon-bg {
+      background-color: #c8f23a;
+    }
+
+    .pillar-card:hover .pillar-icon-letter {
+      color: #0d1209;
+    }
+
+    .pillar-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 28px;
+    }
+
+    .pillar-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: #c8f23a;
+      letter-spacing: 0.1em;
+    }
+
+    .pillar-icon-bg {
+      width: 40px;
+      height: 40px;
+      background-color: #1e2a14;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s;
+    }
+
+    .pillar-icon-letter {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 900;
+      font-size: 16px;
+      color: #7a9464;
+      transition: color 0.2s;
+    }
+
+    .pillar-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(28px, 3.5vw, 38px);
+      font-weight: 900;
+      letter-spacing: -0.025em;
+      margin-bottom: 4px;
+    }
+
+    .pillar-subtitle {
+      font-size: 13px;
+      color: #c8f23a;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .pillar-desc {
+      font-size: 15px;
+      line-height: 1.68;
+      color: #7a9464;
+      margin-bottom: 24px;
+    }
+
+    .pillar-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .pillar-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: #7a9464;
+      border: 1px solid #2d3d21;
+      border-radius: 4px;
+      padding: 4px 10px;
+    }
+
+    /* ── How it works ── */
+    .how-header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+
+    .how-h2 {
+      font-size: clamp(32px, 4.5vw, 56px);
+      line-height: 1.08;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      position: relative;
+    }
+
+    .step {
+      padding: clamp(32px, 4vw, 52px) clamp(24px, 3vw, 40px);
+      border-top: 1px solid #2d3d21;
+      position: relative;
+    }
+
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: -1px;
+      top: 20%;
+      width: 1px;
+      height: 60%;
+      background-color: #2d3d21;
+    }
+
+    .step-num {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(64px, 8vw, 96px);
+      font-weight: 900;
+      color: #1e2a14;
+      line-height: 1;
+      margin-bottom: 24px;
+      letter-spacing: -0.04em;
+    }
+
+    .step-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .step-desc {
+      font-size: 15px;
+      line-height: 1.68;
+      color: #7a9464;
+    }
+
+    /* ── Pull quote ── */
+    .pullquote {
+      position: relative;
+      overflow: hidden;
+      height: clamp(320px, 40vw, 520px);
+      background-color: #141a0f;
+    }
+
+    .pullquote img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      filter: brightness(0.35) saturate(0.6);
+      position: absolute;
+      inset: 0;
+    }
+
+    .pullquote-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, rgba(13,18,9,0.98) 0%, rgba(13,18,9,0.65) 55%, rgba(13,18,9,0.85) 100%);
+    }
+
+    .pullquote-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      padding: 0 clamp(24px, 5vw, 80px);
+      max-width: 1200px;
+      margin: 0 auto;
+      left: 0;
+      right: 0;
+    }
+
+    .pullquote-inner { max-width: 580px; }
+
+    .pullquote-bar {
+      width: 48px;
+      height: 3px;
+      background-color: #c8f23a;
+      margin-bottom: 32px;
+    }
+
+    blockquote {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(22px, 3.2vw, 44px);
+      font-weight: 700;
+      line-height: 1.18;
+      letter-spacing: -0.025em;
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+
+    .pullquote-attribution {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: #c8f23a;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    /* ── Testimonials ── */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .testimonial-card {
+      background-color: #141a0f;
+      border: 1px solid #2d3d21;
+      border-radius: 16px;
+      padding: clamp(24px, 3vw, 36px);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .testimonial-bar {
+      width: 32px;
+      height: 2px;
+      background-color: #c8f23a;
+    }
+
+    .testimonial-quote {
+      font-size: 15px;
+      line-height: 1.72;
+      color: #ede8df;
+      font-style: italic;
+      flex: 1;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .testimonial-avatar {
+      width: 40px;
+      height: 40px;
+      background-color: #1e2a14;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: #c8f23a;
+      font-weight: 500;
+      flex-shrink: 0;
+      border: 1px solid #2d3d21;
+    }
+
+    .testimonial-name {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .testimonial-role {
+      font-size: 12px;
+      color: #7a9464;
+      margin-top: 2px;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      padding: clamp(64px, 8vw, 112px) 24px;
+      background-color: #141a0f;
+      border-top: 1px solid #2d3d21;
+    }
+
+    .cta-inner {
+      max-width: 620px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .cta-h2 {
+      font-size: clamp(36px, 6vw, 72px);
+      line-height: 1.0;
+      letter-spacing: -0.035em;
+      margin-bottom: 20px;
+    }
+
+    .cta-desc {
+      font-size: 16px;
+      line-height: 1.65;
+      color: #7a9464;
+      margin-bottom: 40px;
+    }
+
+    .cta-form {
+      display: flex;
+      gap: 12px;
+      max-width: 480px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+
+    .cta-input {
+      flex: 1;
+      min-width: 200px;
+      background-color: #0d1209;
+      border: 1px solid #2d3d21;
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 15px;
+      color: #ede8df;
+      outline: none;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: border-color 0.2s;
+    }
+
+    .cta-input:focus { border-color: #c8f23a; }
+    .cta-input::placeholder { color: #7a9464; }
+
+    .cta-submit {
+      background-color: #c8f23a;
+      color: #0d1209;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+
+    .cta-submit:hover { opacity: 0.85; }
+
+    .cta-success {
+      display: none;
+      background-color: #1e2a14;
+      border: 1px solid #c8f23a;
+      border-radius: 14px;
+      padding: 28px 36px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .cta-success-emoji { font-size: 28px; margin-bottom: 10px; }
+
+    .cta-success-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #c8f23a;
+      margin-bottom: 6px;
+    }
+
+    .cta-success-sub { font-size: 14px; color: #7a9464; }
+
+    .cta-note {
+      font-size: 13px;
+      color: #7a9464;
+      margin-top: 16px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid #2d3d21;
+      padding: clamp(32px, 4vw, 52px) 24px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-logo-badge {
+      width: 28px;
+      height: 28px;
+      background-color: #c8f23a;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-logo-badge span {
+      font-family: 'DM Mono', monospace;
+      font-weight: 500;
+      font-size: 12px;
+      color: #0d1209;
+    }
+
+    .footer-logo-name {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 700;
+      font-size: 16px;
+      color: #ede8df;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: #7a9464;
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+
+    .footer-link:hover { color: #ede8df; }
+
+    .footer-copy {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: #7a9464;
+    }
+
+    /* ── Responsive ── */
+    @media (min-width: 768px) {
+      .nav-links { display: flex; }
+      .hamburger { display: none; }
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .problem-grid { grid-template-columns: 1fr; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .step:not(:last-child)::after { display: none; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (min-width: 600px) and (max-width: 960px) {
+      .pillars-grid { grid-template-columns: 1fr 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
 </head>
 <body>
-  <main>
-    <h1>DeskWarriorFit</h1>
-    <p>GitHub Pages is configured for deskwarriorfit.com.</p>
-  </main>
+
+  <!-- ── Navigation ── -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <div class="nav-logo-badge"><span>DW</span></div>
+        <span class="nav-logo-name">DeskWarriorFit</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#" class="nav-link">Programs</a>
+        <a href="#" class="nav-link">Science</a>
+        <a href="#" class="nav-link">Community</a>
+        <a href="#" class="nav-link">Blog</a>
+        <a href="#start" class="btn-primary">Start Free</a>
+      </div>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#">Programs</a>
+      <a href="#">Science</a>
+      <a href="#">Community</a>
+      <a href="#">Blog</a>
+      <a href="#start" class="btn-start">Start Free</a>
+    </div>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <section class="hero-grid">
+    <div class="hero-content">
+      <div class="label-tag">For the 9-to-5 warrior</div>
+
+      <h1>Your desk<br><em class="accent">doesn't</em><br>own you.</h1>
+
+      <p class="hero-desc">
+        Built for people who sit 8 hours a day. DeskWarriorFit gives desk workers the tools to move, recover, and fuel — without quitting their job.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#start" class="btn-hero-primary">Begin Your Assessment <span>→</span></a>
+        <a href="#how" class="btn-hero-secondary">See how it works</a>
+      </div>
+
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-value">12k+</div>
+          <div class="hero-stat-label">Warriors enrolled</div>
+        </div>
+        <div>
+          <div class="hero-stat-value">89%</div>
+          <div class="hero-stat-label">Less back pain</div>
+        </div>
+        <div>
+          <div class="hero-stat-value">6 min</div>
+          <div class="hero-stat-label">Daily minimum</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-image-col">
+      <img
+        src="https://images.unsplash.com/photo-1758598306778-b99be86d7709?w=900&h=1000&fit=crop&auto=format"
+        alt="Woman moving energetically at her office desk"
+      >
+      <div class="hero-image-overlay"></div>
+      <div class="hero-checkin">
+        <div class="checkin-label">Today's check-in</div>
+        <div class="checkin-title">Hip flexor release — 5 min</div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill"></div>
+        </div>
+        <div class="progress-meta">
+          <span>72% complete</span>
+          <span>3 / 5 days</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Marquee strip ── -->
+  <div class="marquee-strip">
+    <div class="marquee-track">
+      <span class="marquee-item">Move Daily</span>
+      <span class="marquee-item">Reduce Pain</span>
+      <span class="marquee-item">Focus Better</span>
+      <span class="marquee-item">Sleep Deeper</span>
+      <span class="marquee-item">Fuel Smarter</span>
+      <span class="marquee-item">Move Daily</span>
+      <span class="marquee-item">Reduce Pain</span>
+      <span class="marquee-item">Focus Better</span>
+      <span class="marquee-item">Sleep Deeper</span>
+      <span class="marquee-item">Fuel Smarter</span>
+      <span class="marquee-item">Move Daily</span>
+      <span class="marquee-item">Reduce Pain</span>
+      <span class="marquee-item">Focus Better</span>
+      <span class="marquee-item">Sleep Deeper</span>
+      <span class="marquee-item">Fuel Smarter</span>
+    </div>
+  </div>
+
+  <!-- ── Problem section ── -->
+  <div class="section">
+    <div class="problem-grid">
+      <div>
+        <div class="section-label">The problem</div>
+        <h2 class="problem-h2">
+          The modern office<br>is <em class="accent">breaking</em><br>your body.
+        </h2>
+        <p class="problem-text">
+          The average desk worker sits for 8.9 hours a day — more time sedentary than sleeping. Chronic back pain, tight hips, brain fog, and fatigue aren't personal failures.
+        </p>
+        <p class="problem-text" style="margin-bottom:0">
+          They're predictable outcomes of sedentary work culture. You were never designed for this. But you also can't quit your job. DeskWarriorFit bridges the gap.
+        </p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value" style="color:#c8f23a">8.9h</div>
+          <div class="stat-label">Average daily sitting time</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" style="color:#e8a03c">80%</div>
+          <div class="stat-label">Of desk workers have back pain</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" style="color:#c8f23a">3×</div>
+          <div class="stat-label">Higher cardiovascular risk</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" style="color:#e8a03c">23%</div>
+          <div class="stat-label">Focus drop after 45 min seated</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Three Pillars ── -->
+  <section class="pillars-section">
+    <div class="pillars-inner">
+      <div class="pillars-header">
+        <div>
+          <div class="section-label mb16">Three pillars</div>
+          <h2 class="pillars-h2">Everything you need.<br>Nothing you don't.</h2>
+        </div>
+        <a href="#" class="view-all">View all programs →</a>
+      </div>
+
+      <div class="pillars-grid">
+        <!-- Move -->
+        <div class="pillar-card">
+          <div class="pillar-top">
+            <span class="pillar-num">01</span>
+            <div class="pillar-icon-bg">
+              <span class="pillar-icon-letter">M</span>
+            </div>
+          </div>
+          <h3 class="pillar-title">Move</h3>
+          <div class="pillar-subtitle">Micro-movement protocols</div>
+          <p class="pillar-desc">5-minute movement breaks calibrated to your work schedule. Reduce back pain, boost circulation, and reset your focus — without leaving your desk.</p>
+          <div class="pillar-tags">
+            <span class="pillar-tag">Desk Stretches</span>
+            <span class="pillar-tag">Chair Yoga</span>
+            <span class="pillar-tag">Posture Resets</span>
+          </div>
+        </div>
+
+        <!-- Recover -->
+        <div class="pillar-card">
+          <div class="pillar-top">
+            <span class="pillar-num">02</span>
+            <div class="pillar-icon-bg">
+              <span class="pillar-icon-letter">R</span>
+            </div>
+          </div>
+          <h3 class="pillar-title">Recover</h3>
+          <div class="pillar-subtitle">Ergonomic &amp; sleep rituals</div>
+          <p class="pillar-desc">Your workspace posture shapes your sleep, mood, and output. Build recovery habits that slide between meetings and deadlines.</p>
+          <div class="pillar-tags">
+            <span class="pillar-tag">Sleep Hygiene</span>
+            <span class="pillar-tag">Eye Care</span>
+            <span class="pillar-tag">Tension Release</span>
+          </div>
+        </div>
+
+        <!-- Fuel -->
+        <div class="pillar-card">
+          <div class="pillar-top">
+            <span class="pillar-num">03</span>
+            <div class="pillar-icon-bg">
+              <span class="pillar-icon-letter">F</span>
+            </div>
+          </div>
+          <h3 class="pillar-title">Fuel</h3>
+          <div class="pillar-subtitle">Nutrition for deep work</div>
+          <p class="pillar-desc">Meal timing, hydration, and snack strategies that sustain cognitive performance without the 3pm crash.</p>
+          <div class="pillar-tags">
+            <span class="pillar-tag">Brain Foods</span>
+            <span class="pillar-tag">Hydration</span>
+            <span class="pillar-tag">Meal Timing</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── How it works ── -->
+  <section id="how" class="section">
+    <div class="how-header">
+      <div class="section-label mb16">How it works</div>
+      <h2 class="how-h2">Three steps to<br><em class="accent">unstoppable.</em></h2>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3 class="step-title">Take the Desk Assessment</h3>
+        <p class="step-desc">A 3-minute quiz maps your pain points across posture, energy, focus, and sleep quality.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3 class="step-title">Get Your Protocol</h3>
+        <p class="step-desc">Receive a personalised 4-week plan — daily micro-workouts, habit stacks, and ergonomic tweaks.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3 class="step-title">Train &amp; Adapt</h3>
+        <p class="step-desc">Weekly check-ins evolve your plan as your body responds. No gym. No gear. No commute.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Pull quote / photo ── -->
+  <section class="pullquote">
+    <img
+      src="https://images.unsplash.com/photo-1606663368493-131f4f97c095?w=1600&h=520&fit=crop&auto=format"
+      alt="Person mid-movement in active exercise"
+    >
+    <div class="pullquote-overlay"></div>
+    <div class="pullquote-content">
+      <div class="pullquote-inner">
+        <div class="pullquote-bar"></div>
+        <blockquote>"The body you want is on the other side of 6 minutes a day."</blockquote>
+        <div class="pullquote-attribution">DeskWarriorFit Method</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Testimonials ── -->
+  <div class="section">
+    <div style="margin-bottom:56px">
+      <div class="section-label mb16">Warriors speak</div>
+      <h2 style="font-size:clamp(30px,4vw,50px)">Real people.<br>Real results.</h2>
+    </div>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-bar"></div>
+        <p class="testimonial-quote">"I went from chronic lower back pain to pain-free in 6 weeks. The 5-minute sessions are the only thing that actually fits my calendar."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">SC</div>
+          <div>
+            <div class="testimonial-name">Sarah Chen</div>
+            <div class="testimonial-role">Senior Product Manager, Stripe</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-bar"></div>
+        <p class="testimonial-quote">"My 3pm slump is completely gone. The meal timing guidance alone was worth it — I didn't realise how much blood sugar was killing my afternoons."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">MO</div>
+          <div>
+            <div class="testimonial-name">Marcus Obi</div>
+            <div class="testimonial-role">Engineering Lead, Deliveroo</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-bar"></div>
+        <p class="testimonial-quote">"Finally a fitness programme that doesn't require a gym membership or two hours a day. Built for people like us."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">PN</div>
+          <div>
+            <div class="testimonial-name">Priya Nair</div>
+            <div class="testimonial-role">UX Research Director, Adobe</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Email CTA ── -->
+  <section id="start" class="cta-section">
+    <div class="cta-inner">
+      <div class="section-label mb16">Join the movement</div>
+      <h2 class="cta-h2">Start your free<br><em class="accent">warrior protocol.</em></h2>
+      <p class="cta-desc">
+        Get your personalised desk-fit plan, weekly movement guides, and access to the community — free forever.
+      </p>
+
+      <form class="cta-form" id="ctaForm">
+        <input
+          type="email"
+          class="cta-input"
+          placeholder="your@email.com"
+          required
+          id="ctaEmail"
+        >
+        <button type="submit" class="cta-submit">Get Started →</button>
+      </form>
+
+      <div class="cta-success" id="ctaSuccess">
+        <div class="cta-success-emoji">💪</div>
+        <div class="cta-success-title">You're in, Warrior.</div>
+        <div class="cta-success-sub">Check your inbox for your personalised protocol.</div>
+      </div>
+
+      <p class="cta-note">No credit card. No spam. Just results.</p>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <div class="footer-logo-badge"><span>DW</span></div>
+        <span class="footer-logo-name">DeskWarriorFit</span>
+      </div>
+
+      <div class="footer-links">
+        <a href="#" class="footer-link">Programs</a>
+        <a href="#" class="footer-link">Science</a>
+        <a href="#" class="footer-link">Community</a>
+        <a href="#" class="footer-link">Privacy</a>
+        <a href="#" class="footer-link">Terms</a>
+      </div>
+
+      <div class="footer-copy">© 2026 deskwarriorfit.com</div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+
+    // Close mobile menu when a link is clicked
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      });
+    });
+
+    // Email CTA form
+    const ctaForm = document.getElementById('ctaForm');
+    const ctaSuccess = document.getElementById('ctaSuccess');
+
+    ctaForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      ctaForm.style.display = 'none';
+      ctaSuccess.style.display = 'block';
+    });
+  </script>
+
 </body>
 </html>
