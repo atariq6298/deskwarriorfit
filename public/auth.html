@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — DeskWarriorFit</title>
+  <meta name="description" content="Sign in or create your DeskWarriorFit account to track daily challenges and your progress.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: #0d1209;
+      color: #ede8df;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; }
+
+    /* ── Nav ── */
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      background-color: rgba(13,18,9,0.93);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid #2d3d21;
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 24px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px; text-decoration: none;
+    }
+    .nav-logo-badge {
+      width: 32px; height: 32px;
+      background-color: #c8f23a; border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-logo-badge span {
+      font-family: 'DM Mono', monospace; font-weight: 500;
+      font-size: 13px; color: #0d1209;
+    }
+    .nav-logo-name {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 700; font-size: 17px;
+      letter-spacing: -0.02em; color: #ede8df;
+    }
+    .nav-back {
+      font-family: 'DM Mono', monospace; font-size: 13px;
+      color: #7a9464; transition: color 0.2s;
+    }
+    .nav-back:hover { color: #ede8df; }
+
+    /* ── Main layout ── */
+    .main {
+      flex: 1; display: flex; align-items: center;
+      justify-content: center; padding: 48px 24px;
+    }
+
+    /* ── Auth card ── */
+    .auth-card {
+      width: 100%; max-width: 440px;
+      background-color: #141a0f;
+      border: 1px solid #2d3d21;
+      border-radius: 20px;
+      padding: clamp(32px, 5vw, 48px);
+    }
+    .auth-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px; letter-spacing: 0.14em;
+      color: #c8f23a; text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .auth-heading {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(28px, 5vw, 38px);
+      font-weight: 900; letter-spacing: -0.025em;
+      line-height: 1.05; margin-bottom: 32px;
+    }
+    .auth-heading em { color: #c8f23a; font-style: italic; }
+
+    /* ── Tab toggle ── */
+    .tab-row {
+      display: flex; gap: 0;
+      background-color: #0d1209;
+      border: 1px solid #2d3d21;
+      border-radius: 10px; padding: 4px;
+      margin-bottom: 28px;
+    }
+    .tab-btn {
+      flex: 1; padding: 9px 16px;
+      border: none; border-radius: 7px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px; font-weight: 600;
+      cursor: pointer; transition: background-color 0.2s, color 0.2s;
+      background: transparent; color: #7a9464;
+    }
+    .tab-btn.active { background-color: #c8f23a; color: #0d1209; }
+
+    /* ── Form fields ── */
+    .form-group { margin-bottom: 18px; }
+    label {
+      display: block; font-size: 13px; font-weight: 600;
+      color: #ede8df; margin-bottom: 7px;
+    }
+    .form-input {
+      width: 100%;
+      background-color: #0d1209;
+      border: 1px solid #2d3d21;
+      border-radius: 10px;
+      padding: 13px 16px;
+      font-size: 15px; color: #ede8df;
+      outline: none;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus { border-color: #c8f23a; }
+    .form-input::placeholder { color: #4a5e35; }
+
+    .form-btn {
+      width: 100%; padding: 14px 20px;
+      background-color: #c8f23a; color: #0d1209;
+      border: none; border-radius: 10px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px; font-weight: 700;
+      cursor: pointer; transition: opacity 0.2s;
+      margin-top: 8px;
+    }
+    .form-btn:hover { opacity: 0.85; }
+    .form-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* ── Messages ── */
+    .msg {
+      border-radius: 10px; padding: 13px 16px;
+      font-size: 14px; margin-bottom: 18px; display: none;
+    }
+    .msg.error { background-color: #2a1414; border: 1px solid #7a3030; color: #f29090; }
+    .msg.success { background-color: #1e2a14; border: 1px solid #c8f23a; color: #c8f23a; }
+    .msg.show { display: block; }
+
+    /* ── Divider ── */
+    .switch-link {
+      text-align: center; margin-top: 22px;
+      font-size: 13px; color: #7a9464;
+    }
+    .switch-link a { color: #c8f23a; font-weight: 600; }
+    .switch-link a:hover { text-decoration: underline; }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid #2d3d21;
+      padding: 20px 24px; text-align: center;
+    }
+    .footer-copy {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px; color: #7a9464;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <div class="nav-logo-badge"><span>DW</span></div>
+        <span class="nav-logo-name">DeskWarriorFit</span>
+      </a>
+      <a href="/" class="nav-back">← Back to home</a>
+    </div>
+  </nav>
+
+  <!-- ── Auth card ── -->
+  <main class="main">
+    <div class="auth-card">
+      <div class="auth-eyebrow">Your warrior account</div>
+      <h1 id="authHeading" class="auth-heading">Welcome<br><em>back.</em></h1>
+
+      <!-- Tab toggle -->
+      <div class="tab-row" role="tablist">
+        <button class="tab-btn active" id="tabLogin"  role="tab" onclick="switchTab('login')">Log In</button>
+        <button class="tab-btn"        id="tabSignup" role="tab" onclick="switchTab('signup')">Sign Up</button>
+      </div>
+
+      <!-- Error / success messages -->
+      <div class="msg error"   id="msgError"></div>
+      <div class="msg success" id="msgSuccess"></div>
+
+      <!-- Login form -->
+      <form id="formLogin" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" class="form-input" placeholder="you@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" class="form-input" placeholder="Your password" required>
+        </div>
+        <button type="submit" class="form-btn" id="btnLogin">Log In →</button>
+      </form>
+
+      <!-- Sign-up form (hidden by default) -->
+      <form id="formSignup" onsubmit="handleSignup(event)" style="display:none">
+        <div class="form-group">
+          <label for="signupEmail">Email</label>
+          <input type="email" id="signupEmail" class="form-input" placeholder="you@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="signupPassword">Password <span style="color:#7a9464;font-weight:400">(min. 8 characters)</span></label>
+          <input type="password" id="signupPassword" class="form-input" placeholder="Create a password" minlength="8" required>
+        </div>
+        <button type="submit" class="form-btn" id="btnSignup">Create Account →</button>
+      </form>
+
+      <div class="switch-link" id="switchLink">
+        Don't have an account? <a href="#signup" onclick="switchTab('signup')">Sign up free</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-copy">© 2026 deskwarriorfit.com</div>
+  </footer>
+
+  <script src="/api/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script>
+    const { createClient } = window.supabase;
+    const sb = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+
+    // ── Redirect if already logged in ──
+    sb.auth.getSession().then(({ data: { session } }) => {
+      if (session) window.location.href = '/dashboard.html';
+    });
+
+    // ── Hash / query-param routing ──
+    function getInitialTab() {
+      const hash = window.location.hash.replace('#', '').split('?')[0];
+      return hash === 'signup' ? 'signup' : 'login';
+    }
+
+    function prefillEmail() {
+      const params = new URLSearchParams(
+        window.location.hash.includes('?')
+          ? window.location.hash.split('?')[1]
+          : window.location.search
+      );
+      const email = params.get('email');
+      if (email) {
+        document.getElementById('signupEmail').value = email;
+        document.getElementById('loginEmail').value = email;
+      }
+    }
+
+    function switchTab(tab) {
+      const isLogin = tab === 'login';
+      document.getElementById('tabLogin').classList.toggle('active', isLogin);
+      document.getElementById('tabSignup').classList.toggle('active', !isLogin);
+      document.getElementById('formLogin').style.display = isLogin ? '' : 'none';
+      document.getElementById('formSignup').style.display = isLogin ? 'none' : '';
+      document.getElementById('authHeading').innerHTML = isLogin
+        ? 'Welcome<br><em>back.</em>'
+        : 'Join the<br><em>warriors.</em>';
+      document.getElementById('switchLink').innerHTML = isLogin
+        ? 'Don\'t have an account? <a href="#signup" onclick="switchTab(\'signup\')">Sign up free</a>'
+        : 'Already have an account? <a href="#login" onclick="switchTab(\'login\')">Log in</a>';
+      hideMessages();
+      history.replaceState(null, '', `#${tab}`);
+    }
+
+    function showError(msg) {
+      const el = document.getElementById('msgError');
+      el.textContent = msg;
+      el.classList.add('show');
+      document.getElementById('msgSuccess').classList.remove('show');
+    }
+
+    function showSuccess(msg) {
+      const el = document.getElementById('msgSuccess');
+      el.textContent = msg;
+      el.classList.add('show');
+      document.getElementById('msgError').classList.remove('show');
+    }
+
+    function hideMessages() {
+      document.getElementById('msgError').classList.remove('show');
+      document.getElementById('msgSuccess').classList.remove('show');
+    }
+
+    async function handleLogin(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btnLogin');
+      btn.disabled = true;
+      btn.textContent = 'Logging in…';
+      hideMessages();
+
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value;
+
+      const { error } = await sb.auth.signInWithPassword({ email, password });
+
+      if (error) {
+        showError(error.message);
+        btn.disabled = false;
+        btn.textContent = 'Log In →';
+      } else {
+        window.location.href = '/dashboard.html';
+      }
+    }
+
+    async function handleSignup(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btnSignup');
+      btn.disabled = true;
+      btn.textContent = 'Creating account…';
+      hideMessages();
+
+      const email = document.getElementById('signupEmail').value.trim();
+      const password = document.getElementById('signupPassword').value;
+
+      const { error } = await sb.auth.signUp({ email, password });
+
+      if (error) {
+        showError(error.message);
+        btn.disabled = false;
+        btn.textContent = 'Create Account →';
+      } else {
+        showSuccess('Account created! Check your email to confirm, then log in.');
+        document.getElementById('formSignup').reset();
+        btn.disabled = false;
+        btn.textContent = 'Create Account →';
+        setTimeout(() => switchTab('login'), 3000);
+      }
+    }
+
+    // ── Initialise ──
+    switchTab(getInitialTab());
+    prefillEmail();
+  </script>
+
+</body>
+</html>
