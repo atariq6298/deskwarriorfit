@@ -1,0 +1,19 @@
+{
+  "name": "deskwarriorfit",
+  "version": "1.0.0",
+  "description": "DeskWarriorFit — fitness for desk workers. Full-stack app with Supabase auth.",
+  "main": "server/index.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^4.21.2"
+  }
+}
