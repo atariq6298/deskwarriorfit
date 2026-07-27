@@ -284,7 +284,11 @@
 
   </div>
 
-  <script src="/api/config.js"></script>
+  <script>
+    window.SUPABASE_URL = 'https://pmnmejhkoxqlvzxzuaag.supabase.co';
+    window.SUPABASE_ANON_KEY = 'sb_publishable_HweWmPaMtvEdsklGjnLg2Q_cjEx-Uud';
+    window.API_BASE = 'https://pmnmejhkoxqlvzxzuaag.supabase.co/functions/v1';
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script>
     const { createClient } = window.supabase;
@@ -325,7 +329,7 @@
       const { data: { session } } = await sb.auth.getSession();
       const token = session.access_token;
 
-      const res = await fetch('/api/progress', {
+      const res = await fetch(window.API_BASE + '/progress', {
         headers: { Authorization: 'Bearer ' + token },
       });
       if (!res.ok) return;
@@ -364,7 +368,7 @@
 
     // ── Load today's challenges ──
     async function loadChallenges() {
-      const res = await fetch('/api/challenges/today');
+      const res = await fetch(window.API_BASE + '/challenges/today');
       const grid = document.getElementById('challengesGrid');
 
       if (!res.ok) {
@@ -419,7 +423,7 @@
       const { data: { session } } = await sb.auth.getSession();
       const token = session.access_token;
 
-      const res = await fetch('/api/progress', {
+      const res = await fetch(window.API_BASE + '/progress', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

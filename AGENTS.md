@@ -7,67 +7,80 @@
 - **Mission:** Help desk workers enjoy a healthier life
 - **Auth & DB:** Supabase (email auth + Postgres + Row Level Security)
 
+## Architecture
+- **Frontend:** Static HTML/CSS/JS hosted on GitHub Pages (`main` branch root)
+- **Backend API:** Supabase Edge Functions (Deno) — no server/Express needed
+- **Database:** Supabase Postgres with RLS
+- **Auth:** Supabase Auth (email/password), handled entirely client-side via `@supabase/supabase-js`
+
 ## Project structure
 ```
 /
-├── index.html              ← Landing page (served by Express at /)
-├── public/
-│   ├── auth.html           ← Login / Sign Up page (Supabase JS SDK)
-│   └── dashboard.html      ← Logged-in user view (challenges + streak)
-├── server/
-│   ├── index.js            ← Express entry point
-│   ├── middleware/
-│   │   └── auth.js         ← Supabase JWT validation middleware
-│   └── routes/
-│       ├── challenges.js   ← GET /api/challenges, /api/challenges/today
-│       └── progress.js     ← GET/POST /api/progress (protected)
+├── index.html              ← Landing page
+├── auth.html               ← Login / Sign Up page
+├── dashboard.html          ← Logged-in user view (challenges + streak)
+├── CNAME                   ← Custom domain for GitHub Pages
 ├── supabase/
-│   └── schema.sql          ← Run once in Supabase SQL Editor to create tables
-├── package.json
-├── render.yaml             ← Render Web Service deployment config
-├── .env.example            ← Copy to .env and fill in Supabase credentials
-├── CNAME                   ← Custom domain (update DNS to point to Render)
+│   ├── schema.sql          ← DB schema (already applied — do not re-run blindly)
+│   └── functions/
+│       ├── challenges/
+│       │   └── index.ts    ← Edge Function: GET /challenges, GET /challenges/today
+│       └── progress/
+│           └── index.ts    ← Edge Function: GET/POST /progress (auth required)
+├── server/                 ← Legacy Express app (no longer deployed, kept for reference)
+├── package.json            ← Node deps for local dev only
+├── render.yaml             ← Legacy Render config (no longer in use)
 └── README.md
 ```
 
-## Environment variables
-Copy `.env.example` to `.env` and fill in:
-- `SUPABASE_URL` — from Supabase dashboard → Settings → API
-- `SUPABASE_ANON_KEY` — public anon key (safe to expose to browser)
-- `SUPABASE_SERVICE_ROLE_KEY` — secret, server-only; never expose to browser
-- `PORT` — defaults to 3000 in development
+## Edge Function URLs
+- `https://pmnmejhkoxqlvzxzuaag.supabase.co/functions/v1/challenges` — all challenges
+- `https://pmnmejhkoxqlvzxzuaag.supabase.co/functions/v1/challenges/today` — today's challenges
+- `https://pmnmejhkoxqlvzxzuaag.supabase.co/functions/v1/progress` — user progress (GET/POST, requires `Authorization: Bearer <token>`)
 
-## Running locally
-```bash
-npm install
-cp .env.example .env   # fill in your Supabase credentials
-npm run dev            # starts server with --watch on port 3000
+## Frontend config
+Supabase credentials are embedded directly in the HTML pages (safe — these are public keys):
+```html
+<script>
+  window.SUPABASE_URL = 'https://pmnmejhkoxqlvzxzuaag.supabase.co';
+  window.SUPABASE_ANON_KEY = 'sb_publishable_HweWmPaMtvEdsklGjnLg2Q_cjEx-Uud';
+  window.API_BASE = 'https://pmnmejhkoxqlvzxzuaag.supabase.co/functions/v1'; // dashboard.html only
+</script>
 ```
 
-## Deployment (Render.com)
-1. Push to GitHub → connect repo in Render dashboard
-2. Render auto-detects `render.yaml` (Node web service, `npm install` + `node server/index.js`)
-3. Add env vars in Render: `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`
-4. Update DNS for `deskwarriorfit.com` to point to the Render service URL (change CNAME at your registrar)
+## Deployment
 
-## Supabase setup (one-time)
-1. Create project at supabase.com
-2. Enable Email Auth: Authentication → Providers → Email
-3. Run `supabase/schema.sql` in Supabase SQL Editor (creates tables, RLS policies, seed challenges)
-4. Copy URL + anon key + service-role key into env vars
+### GitHub Pages (frontend)
+1. Go to GitHub repo → Settings → Pages
+2. Set source: **Deploy from a branch** → `main` → `/ (root)`
+3. The `CNAME` file handles the custom domain automatically
+4. Update DNS at your registrar: point `deskwarriorfit.com` CNAME to `atariq6298.github.io`
+
+### Supabase Edge Functions (backend)
+Deploy using Supabase MCP or CLI:
+```bash
+supabase functions deploy challenges --no-verify-jwt
+supabase functions deploy progress --no-verify-jwt
+```
+The functions read `SUPABASE_URL`, `SUPABASE_ANON_KEY`, and `SUPABASE_SERVICE_ROLE_KEY` from Supabase's built-in environment — no extra secrets needed.
+
+## Supabase setup (already done)
+- Tables created: `challenges`, `user_progress` (with RLS policies)
+- Seed data applied: 20 weekly challenges
+- Email Auth is enabled
 
 ## Working guidelines
-- The Express server serves `public/` as static files and `index.html` explicitly at `/`.
-- `/api/config.js` is a dynamic Express route that safely exposes `SUPABASE_URL` and `SUPABASE_ANON_KEY` to the browser without hardcoding them in HTML.
-- `SUPABASE_SERVICE_ROLE_KEY` must never be sent to the browser; it is used server-side only.
-- Auth is handled entirely by the Supabase JS SDK on the frontend; the server only validates JWTs using `supabase.auth.getUser(token)`.
+- `SUPABASE_SERVICE_ROLE_KEY` is only used inside Edge Functions — never in browser HTML.
+- The `progress` Edge Function validates the user JWT by calling `supabase.auth.getUser()` and enforces RLS by passing the user's token to the Supabase client.
+- The `challenges` Edge Function is public (`verify_jwt: false`) — challenges are read-only and publicly accessible.
 - Preserve the `CNAME` file and its value unless the domain is intentionally being changed.
 - Make content and UX decisions consistent with the site mission of improving health for desk workers.
 
 ## Validation notes
 - No automated test suite configured yet.
-- After changes, verify by running `npm run dev` and testing pages manually.
+- To test Edge Functions: use the Supabase dashboard → Edge Functions → Logs.
 - Validate static HTML files for correctness (links, auth redirects, API calls).
+- To test locally, you can still run `npm run dev` with a `.env` file (the Express server still works for local development).
 
 ## Content direction
 - Favor clear, encouraging, practical messaging for desk workers.
