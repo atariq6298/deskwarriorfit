@@ -28,8 +28,10 @@ Deno.serve(async (req: Request) => {
       const dayOfWeek = new Date().getDay()
       const { data, error } = await supabase
         .from('challenges')
-        .select('id, title, description, category, points')
-        .eq('day_of_week', dayOfWeek)
+        .select('id, title, description, category, points, activity_type, day_of_week, times_per_day, interval_hours, times_per_week')
+        .or(`activity_type.eq.routine,day_of_week.eq.${dayOfWeek}`)
+        .order('activity_type', { ascending: true })
+        .order('day_of_week', { ascending: true, nullsFirst: true })
 
       if (error) throw error
       return new Response(JSON.stringify({ challenges: data || [] }), {
@@ -38,8 +40,10 @@ Deno.serve(async (req: Request) => {
     } else {
       const { data, error } = await supabase
         .from('challenges')
-        .select('id, title, description, category, points, day_of_week')
-        .order('day_of_week', { ascending: true })
+        .select('id, title, description, category, points, activity_type, day_of_week, times_per_day, interval_hours, times_per_week')
+        .order('activity_type', { ascending: true })
+        .order('day_of_week', { ascending: true, nullsFirst: true })
+        .order('title', { ascending: true })
 
       if (error) throw error
       return new Response(JSON.stringify({ challenges: data || [] }), {

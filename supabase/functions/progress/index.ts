@@ -31,6 +31,32 @@ function calculateStreak(progressRows: { completed_at: string }[]) {
   return streak
 }
 
+function startOfDay(date: Date) {
+  const d = new Date(date)
+  d.setHours(0, 0, 0, 0)
+  return d
+}
+
+function startOfWeek(date: Date) {
+  const d = startOfDay(date)
+  const day = d.getDay()
+  const diff = day === 0 ? 6 : day - 1
+  d.setDate(d.getDate() - diff)
+  return d
+}
+
+function endOfDay(date: Date) {
+  const d = startOfDay(date)
+  d.setDate(d.getDate() + 1)
+  return d
+}
+
+function endOfWeek(date: Date) {
+  const d = startOfWeek(date)
+  d.setDate(d.getDate() + 7)
+  return d
+}
+
 Deno.serve(async (req: Request) => {
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders })
@@ -93,21 +119,62 @@ Deno.serve(async (req: Request) => {
         })
       }
 
-      const today = new Date().toISOString().split('T')[0]
-      const { data: existing } = await supabase
-        .from('user_progress')
-        .select('id')
-        .eq('user_id', user.id)
-        .eq('challenge_id', challenge_id)
-        .gte('completed_at', `${today}T00:00:00.000Z`)
-        .lte('completed_at', `${today}T23:59:59.999Z`)
+      const { data: challenge, error: challengeError } = await supabase
+        .from('challenges')
+        .select('id, activity_type, times_per_day, interval_hours, times_per_week, day_of_week')
+        .eq('id', challenge_id)
         .maybeSingle()
 
-      if (existing) {
-        return new Response(JSON.stringify({ error: 'Challenge already completed today' }), {
+      if (challengeError || !challenge) {
+        return new Response(JSON.stringify({ error: 'Challenge not found' }), {
+          status: 404,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        })
+      }
+
+      const now = new Date()
+      const periodStart = challenge.times_per_week != null
+        ? startOfWeek(now)
+        : startOfDay(now)
+      const periodEnd = challenge.times_per_week != null
+        ? endOfWeek(now)
+        : endOfDay(now)
+
+      const { data: existing } = await supabase
+        .from('user_progress')
+        .select('id, completed_at')
+        .eq('user_id', user.id)
+        .eq('challenge_id', challenge_id)
+        .gte('completed_at', periodStart.toISOString())
+        .lt('completed_at', periodEnd.toISOString())
+        .order('completed_at', { ascending: false })
+
+      const completionLimit = challenge.times_per_week != null
+        ? challenge.times_per_week
+        : challenge.times_per_day != null
+          ? challenge.times_per_day
+          : 1
+
+      if ((existing || []).length >= completionLimit) {
+        const periodLabel = challenge.times_per_week != null ? 'this week' : 'today'
+        return new Response(JSON.stringify({ error: `Challenge already completed enough times ${periodLabel}` }), {
           status: 409,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         })
+      }
+
+      if (challenge.interval_hours != null && existing && existing.length > 0) {
+        const lastCompleted = new Date(existing[0].completed_at)
+        const nextAllowed = new Date(lastCompleted.getTime() + challenge.interval_hours * 60 * 60 * 1000)
+        if (nextAllowed > now) {
+          return new Response(JSON.stringify({
+            error: 'This routine is not due yet',
+            next_available_at: nextAllowed.toISOString(),
+          }), {
+            status: 409,
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          })
+        }
       }
 
       const { data, error } = await supabase

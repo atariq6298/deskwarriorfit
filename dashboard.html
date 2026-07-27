@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard — DeskWarriorFit</title>
-  <meta name="description" content="Your daily desk-warrior challenges, streak, and progress tracker.">
+  <title>Dashboard - DeskWarriorFit</title>
+  <meta name="description" content="Your daily desk-warrior challenges, routines, and weekly progress tracker.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -20,7 +20,6 @@
     }
     a { text-decoration: none; }
 
-    /* ── Nav ── */
     .nav {
       position: sticky; top: 0; z-index: 50;
       background-color: rgba(13,18,9,0.93);
@@ -65,10 +64,8 @@
     }
     .btn-logout:hover { color: #ede8df; border-color: #7a9464; }
 
-    /* ── Page content ── */
     .page { max-width: 1200px; margin: 0 auto; padding: clamp(32px, 5vw, 56px) 24px; }
 
-    /* ── Greeting & date ── */
     .greeting-row {
       display: flex; align-items: flex-end; justify-content: space-between;
       flex-wrap: wrap; gap: 16px; margin-bottom: 36px;
@@ -89,7 +86,6 @@
       color: #7a9464; text-align: right;
     }
 
-    /* ── Stat strip ── */
     .stat-strip {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -116,7 +112,6 @@
       font-size: 12px; color: #7a9464; margin-top: 4px;
     }
 
-    /* ── Section heading ── */
     .section-label {
       font-family: 'DM Mono', monospace; font-size: 11px;
       letter-spacing: 0.14em; color: #c8f23a;
@@ -126,10 +121,16 @@
       font-family: 'Fraunces', Georgia, serif;
       font-size: clamp(22px, 3vw, 30px);
       font-weight: 900; letter-spacing: -0.02em;
-      margin-bottom: 24px;
+      margin-bottom: 12px;
+    }
+    .section-copy {
+      color: #7a9464;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      max-width: 760px;
     }
 
-    /* ── Day tabs ── */
     .week-tabs-wrap {
       overflow-x: auto; -webkit-overflow-scrolling: touch;
       scrollbar-width: none; margin-bottom: 32px;
@@ -166,7 +167,6 @@
     }
     .day-pip.done { background-color: #c8f23a; }
 
-    /* ── Challenge cards ── */
     .challenges-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -181,7 +181,7 @@
     }
     .challenge-card.done {
       border-color: #c8f23a;
-      opacity: 0.75;
+      opacity: 0.8;
     }
     .challenge-card-top {
       display: flex; justify-content: space-between; align-items: flex-start;
@@ -205,6 +205,26 @@
     .challenge-desc {
       font-size: 14px; line-height: 1.65; color: #7a9464;
     }
+    .challenge-meta {
+      display: flex; flex-wrap: wrap; gap: 8px 14px;
+      font-size: 12px; color: #7a9464;
+    }
+    .challenge-meta strong { color: #ede8df; font-weight: 600; }
+    .challenge-foot {
+      display: flex; justify-content: space-between; gap: 12px;
+      align-items: center; flex-wrap: wrap;
+    }
+    .progress-text {
+      font-family: 'DM Mono', monospace; font-size: 12px; color: #7a9464;
+    }
+    .progress-bar {
+      height: 6px; border-radius: 999px; background: #1a2a14;
+      overflow: hidden; border: 1px solid #2d3d21;
+    }
+    .progress-fill {
+      height: 100%; border-radius: inherit;
+      background: linear-gradient(90deg, #c8f23a, #8ddf4d);
+    }
     .complete-btn {
       align-self: flex-start;
       background-color: transparent;
@@ -224,7 +244,6 @@
     }
     .complete-btn:disabled { cursor: default; }
 
-    /* ── Recent activity ── */
     .activity-list { display: flex; flex-direction: column; gap: 12px; }
     .activity-item {
       display: flex; align-items: center; gap: 16px;
@@ -242,7 +261,6 @@
       color: #7a9464; white-space: nowrap;
     }
 
-    /* ── Empty state ── */
     .empty-state {
       text-align: center; padding: 48px 24px;
       background-color: #141a0f;
@@ -252,7 +270,6 @@
     .empty-icon { font-size: 36px; margin-bottom: 12px; }
     .empty-title { font-size: 16px; font-weight: 600; color: #ede8df; margin-bottom: 6px; }
 
-    /* ── Loading skeleton ── */
     .loading-text {
       color: #7a9464; font-family: 'DM Mono', monospace;
       font-size: 13px; padding: 32px 0;
@@ -260,8 +277,6 @@
   </style>
 </head>
 <body>
-
-  <!-- ── Navigation ── -->
   <nav class="nav">
     <div class="nav-inner">
       <a href="/" class="nav-logo">
@@ -275,10 +290,7 @@
     </div>
   </nav>
 
-  <!-- ── Dashboard ── -->
   <div class="page">
-
-    <!-- Greeting -->
     <div class="greeting-row">
       <div>
         <div class="greeting-label">Your dashboard</div>
@@ -287,41 +299,52 @@
       <div class="today-date" id="todayDate"></div>
     </div>
 
-    <!-- Stats strip -->
     <div class="stat-strip">
       <div class="stat-tile">
         <div class="stat-tile-label">Day Streak</div>
-        <div class="stat-tile-value" id="statStreak">—</div>
+        <div class="stat-tile-value" id="statStreak">-</div>
         <div class="stat-tile-sub">consecutive days</div>
       </div>
       <div class="stat-tile">
         <div class="stat-tile-label">Today</div>
-        <div class="stat-tile-value" id="statToday">—</div>
-        <div class="stat-tile-sub">challenges done</div>
+        <div class="stat-tile-value" id="statToday">-</div>
+        <div class="stat-tile-sub">check-ins completed</div>
       </div>
       <div class="stat-tile">
         <div class="stat-tile-label">Total Points</div>
-        <div class="stat-tile-value" id="statPoints">—</div>
+        <div class="stat-tile-value" id="statPoints">-</div>
         <div class="stat-tile-sub">points earned</div>
       </div>
     </div>
 
-    <!-- Week plan -->
+    <div class="section-label">Today's routines</div>
+    <h2 class="section-h2">Built into your day</h2>
+    <p class="section-copy">Hydration reminders, stretch breaks, and other repeatable habits that keep you moving.</p>
+    <div class="challenges-grid" id="routineGrid">
+      <p class="loading-text">Fetching routines...</p>
+    </div>
+
+    <div class="section-label">Weekly focus</div>
+    <h2 class="section-h2">Strength, posture, recovery</h2>
+    <p class="section-copy">These goals can be completed once or twice per week without pressure.</p>
+    <div class="challenges-grid" id="weeklyGrid">
+      <p class="loading-text">Fetching weekly focus...</p>
+    </div>
+
     <div class="section-label">Week plan</div>
+    <p class="section-copy">Browse day-specific work for the current week. Routines and weekly focus stay above.</p>
     <div class="week-tabs-wrap">
       <div class="week-tabs" id="weekTabs"></div>
     </div>
-    <h2 class="section-h2" id="challengeHeading">Loading…</h2>
-    <div class="challenges-grid" id="challengesGrid">
-      <p class="loading-text">Fetching your challenges…</p>
+    <h2 class="section-h2" id="challengeHeading">Loading...</h2>
+    <div class="challenges-grid" id="dayGrid">
+      <p class="loading-text">Fetching your week plan...</p>
     </div>
 
-    <!-- Recent activity -->
     <div id="recentSection" style="display:none">
       <div class="section-label">Recent activity</div>
       <div class="activity-list" id="activityList"></div>
     </div>
-
   </div>
 
   <script>
@@ -335,257 +358,388 @@
     const sb = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
 
     const DAY_NAMES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    const todayDow = new Date().getDay(); // 0–6
+    const FULL_DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const todayDow = new Date().getDay();
 
-    let allChallenges = {};   // keyed by day_of_week
-    let completedIds = new Set();  // all-time completed challenge IDs
-    let todayCompletedIds = new Set(); // today's completed challenge IDs
+    let allChallenges = [];
     let allProgress = [];
+    let routines = [];
+    let weeklyFocus = [];
+    let dayPlan = { 0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: [] };
     let activeDow = todayDow;
 
-    // ── Auth guard ──
     async function init() {
       const { data: { session } } = await sb.auth.getSession();
-      if (!session) { window.location.href = '/auth.html'; return; }
+      if (!session) {
+        window.location.href = '/auth.html';
+        return;
+      }
 
       document.getElementById('userEmail').textContent = session.user.email;
       setGreeting();
       setDate();
-      await Promise.all([loadProgress(), loadAllChallenges()]);
-      renderWeekTabs();
-      renderDay(activeDow);
+      await Promise.all([loadProgress(), loadChallenges()]);
+      renderEverything();
     }
 
     function setGreeting() {
-      const h = new Date().getHours();
-      const t = h < 12 ? 'morning' : h < 17 ? 'afternoon' : 'evening';
-      document.getElementById('greeting').textContent = `Good ${t}, Warrior.`;
+      const hour = new Date().getHours();
+      const time = hour < 12 ? 'morning' : hour < 17 ? 'afternoon' : 'evening';
+      document.getElementById('greeting').textContent = `Good ${time}, Warrior.`;
     }
 
     function setDate() {
       const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-      document.getElementById('todayDate').textContent =
-        new Date().toLocaleDateString('en-GB', opts);
+      document.getElementById('todayDate').textContent = new Date().toLocaleDateString('en-GB', opts);
     }
 
-    // ── Load user progress ──
+    function startOfDay(date) {
+      const d = new Date(date);
+      d.setHours(0, 0, 0, 0);
+      return d;
+    }
+
+    function startOfWeek(date) {
+      const d = startOfDay(date);
+      const day = d.getDay();
+      const diff = day === 0 ? 6 : day - 1;
+      d.setDate(d.getDate() - diff);
+      return d;
+    }
+
+    function endOfWeek(date) {
+      const d = startOfWeek(date);
+      d.setDate(d.getDate() + 7);
+      return d;
+    }
+
+    function getWeekDate(dow) {
+      const monday = startOfWeek(new Date());
+      const d = new Date(monday);
+      d.setDate(monday.getDate() + (dow === 0 ? 6 : dow - 1));
+      return d;
+    }
+
+    function inPeriod(row, start, end) {
+      const date = new Date(row.completed_at);
+      return date >= start && date < end;
+    }
+
+    function getRoutinePeriod() {
+      const start = startOfDay(new Date());
+      const end = new Date(start);
+      end.setDate(start.getDate() + 1);
+      return { start, end, label: 'today' };
+    }
+
+    function getWeeklyPeriod() {
+      return { start: startOfWeek(new Date()), end: endOfWeek(new Date()), label: 'this week' };
+    }
+
+    function countCompletions(challengeId, start, end) {
+      return allProgress.filter(row => row.challenge_id === challengeId && inPeriod(row, start, end)).length;
+    }
+
+    function latestCompletion(challengeId, start, end) {
+      return allProgress
+        .filter(row => row.challenge_id === challengeId && inPeriod(row, start, end))
+        .sort((a, b) => new Date(b.completed_at) - new Date(a.completed_at))[0] || null;
+    }
+
+    function groupChallenges(challenges) {
+      routines = [];
+      weeklyFocus = [];
+      dayPlan = { 0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: [] };
+
+      challenges.forEach(challenge => {
+        if (challenge.activity_type === 'routine') {
+          routines.push(challenge);
+          return;
+        }
+
+        if (challenge.times_per_week != null) {
+          weeklyFocus.push(challenge);
+          return;
+        }
+
+        if (challenge.day_of_week != null) {
+          dayPlan[challenge.day_of_week].push(challenge);
+        }
+      });
+
+      routines.sort((a, b) => a.title.localeCompare(b.title));
+      weeklyFocus.sort((a, b) => a.title.localeCompare(b.title));
+      for (let d = 0; d <= 6; d++) {
+        dayPlan[d].sort((a, b) => a.title.localeCompare(b.title));
+      }
+    }
+
     async function loadProgress() {
       const { data: { session } } = await sb.auth.getSession();
       const res = await fetch(window.API_BASE + '/progress', {
         headers: { Authorization: 'Bearer ' + session.access_token },
       });
       if (!res.ok) return;
+
       const { progress, streak } = await res.json();
       allProgress = progress || [];
 
       document.getElementById('statStreak').textContent = streak;
 
-      const today = new Date().toISOString().split('T')[0];
-      allProgress.forEach(r => {
-        completedIds.add(r.challenge_id);
-        if (r.completed_at.startsWith(today)) todayCompletedIds.add(r.challenge_id);
-      });
+      const today = startOfDay(new Date());
+      const tomorrow = new Date(today);
+      tomorrow.setDate(today.getDate() + 1);
+      const todayCount = allProgress.filter(row => {
+        const date = new Date(row.completed_at);
+        return date >= today && date < tomorrow;
+      }).length;
+      document.getElementById('statToday').textContent = todayCount;
 
-      document.getElementById('statToday').textContent = todayCompletedIds.size;
-
-      const totalPoints = allProgress.reduce((s, r) => s + (r.challenges?.points || 0), 0);
+      const totalPoints = allProgress.reduce((sum, row) => sum + (row.challenges?.points || 0), 0);
       document.getElementById('statPoints').textContent = totalPoints;
 
-      // Recent activity
       const recent = allProgress.slice(0, 10);
       if (recent.length) {
         document.getElementById('recentSection').style.display = '';
-        document.getElementById('activityList').innerHTML = recent.map(r => `
+        document.getElementById('activityList').innerHTML = recent.map(row => `
           <div class="activity-item">
             <div class="activity-dot"></div>
-            <span class="activity-title">${escHtml(r.challenges?.title || 'Challenge')}</span>
-            <span class="activity-time">${formatRelativeTime(new Date(r.completed_at))}</span>
+            <span class="activity-title">${escHtml(row.challenges?.title || 'Challenge')}</span>
+            <span class="activity-time">${formatRelativeTime(new Date(row.completed_at))}</span>
           </div>`).join('');
       }
     }
 
-    // ── Load ALL challenges (all days) ──
-    async function loadAllChallenges() {
+    async function loadChallenges() {
       const res = await fetch(window.API_BASE + '/challenges');
       if (!res.ok) return;
+
       const { challenges } = await res.json();
-      // Group by day_of_week
-      for (let d = 0; d <= 6; d++) allChallenges[d] = [];
-      (challenges || []).forEach(c => {
-        if (allChallenges[c.day_of_week] !== undefined)
-          allChallenges[c.day_of_week].push(c);
-      });
+      allChallenges = challenges || [];
+      groupChallenges(allChallenges);
     }
 
-    // ── Build week tab bar ──
-    function renderWeekTabs() {
-      // Build a Mon→Sun order starting from today's week
-      // Show Mon(1)→Sun(0) so week reads naturally
-      const orderedDows = [1, 2, 3, 4, 5, 6, 0];
-      const today = new Date();
+    function renderEverything() {
+      renderRoutineSection();
+      renderWeeklySection();
+      renderWeekTabs();
+      renderDay(activeDow);
+    }
 
+    function renderRoutineSection() {
+      const grid = document.getElementById('routineGrid');
+      if (!routines.length) {
+        grid.innerHTML = `<div class="empty-state"><div class="empty-icon">🌤️</div><div class="empty-title">No routines yet</div><p>Add daily routines when you're ready.</p></div>`;
+        return;
+      }
+
+      const period = getRoutinePeriod();
+      grid.innerHTML = routines.map(challenge => renderChallengeCard(challenge, period, 'today')).join('');
+    }
+
+    function renderWeeklySection() {
+      const grid = document.getElementById('weeklyGrid');
+      if (!weeklyFocus.length) {
+        grid.innerHTML = `<div class="empty-state"><div class="empty-icon">🗓️</div><div class="empty-title">No weekly focus yet</div><p>Weekly goals will appear here.</p></div>`;
+        return;
+      }
+
+      const period = getWeeklyPeriod();
+      grid.innerHTML = weeklyFocus.map(challenge => renderChallengeCard(challenge, period, 'week')).join('');
+    }
+
+    function renderChallengeCard(challenge, period, mode) {
+      const limit = mode === 'week'
+        ? (challenge.times_per_week || 1)
+        : (challenge.times_per_day || 1);
+      const completed = countCompletions(challenge.id, period.start, period.end);
+      const done = completed >= limit;
+      const progressPct = Math.min(100, Math.round((completed / limit) * 100));
+      const last = latestCompletion(challenge.id, period.start, period.end);
+      const nextAt = challenge.interval_hours != null && last
+        ? new Date(new Date(last.completed_at).getTime() + challenge.interval_hours * 60 * 60 * 1000)
+        : null;
+      const canComplete = !done && (!challenge.interval_hours || !nextAt || nextAt <= new Date());
+
+      let helper = `${completed}/${limit} ${period.label}`;
+      if (challenge.interval_hours != null) {
+        if (last) {
+          helper = nextAt > new Date() ? `Next due in ${formatTimeUntil(nextAt)}` : 'Ready now';
+        } else {
+          helper = 'Due now';
+        }
+      }
+
+      const note = challenge.interval_hours != null
+        ? `Every ${challenge.interval_hours}h`
+        : mode === 'week'
+          ? `${limit} times per week`
+          : `${limit} times per day`;
+
+      const buttonLabel = done
+        ? (mode === 'week' ? 'Done for the week' : 'Done for today')
+        : canComplete
+          ? 'Mark complete'
+          : `Wait ${formatTimeUntil(nextAt)}`;
+
+      return `
+        <div class="challenge-card ${done ? 'done' : ''}" id="card-${challenge.id}">
+          <div class="challenge-card-top">
+            <span class="challenge-category cat-${challenge.category}">${challenge.category}</span>
+            <span class="challenge-points">+${challenge.points} pts</span>
+          </div>
+          <div class="challenge-title">${escHtml(challenge.title)}</div>
+          <div class="challenge-desc">${escHtml(challenge.description || '')}</div>
+          <div class="challenge-meta">
+            <span><strong>${helper}</strong></span>
+            <span>${note}</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width:${progressPct}%"></div></div>
+          <div class="challenge-foot">
+            <span class="progress-text">${helper}</span>
+            ${done ? '<span class="progress-text" style="color:#c8f23a;">✓ Complete</span>' : `<button class="complete-btn" id="btn-${challenge.id}" onclick="markComplete('${challenge.id}')" ${canComplete ? '' : 'disabled'}>${buttonLabel}</button>`}
+          </div>
+        </div>`;
+    }
+
+    function renderWeekTabs() {
+      const orderedDows = [1, 2, 3, 4, 5, 6, 0];
       const tabs = document.getElementById('weekTabs');
       tabs.innerHTML = orderedDows.map(dow => {
-        // Find the date of this dow in the current week (week starts Monday)
-        const diff = dow === 0 ? (7 - today.getDay()) % 7 || 7 : dow - today.getDay();
-        // Simpler: just show day number relative to today's week
-        const d = new Date(today);
-        const dayOffset = (dow - today.getDay() + 7) % 7;
-        // For today itself offset = 0; others may go in future
-        // We want to show the current week's Mon-Sun
-        const weekMonday = new Date(today);
-        weekMonday.setDate(today.getDate() - ((today.getDay() + 6) % 7)); // Monday of this week
-        const dayDate = new Date(weekMonday);
-        dayDate.setDate(weekMonday.getDate() + (dow === 0 ? 6 : dow - 1));
-
-        const challenges = allChallenges[dow] || [];
-        const doneCount = challenges.filter(c => {
-          // For today, use todayCompletedIds; for past days check completedIds with date
-          if (dow === todayDow) return todayCompletedIds.has(c.id);
-          const dateStr = dayDate.toISOString().split('T')[0];
-          return allProgress.some(r => r.challenge_id === c.id && r.completed_at.startsWith(dateStr));
+        const dayDate = getWeekDate(dow);
+        const challenges = dayPlan[dow] || [];
+        const doneCount = challenges.filter(challenge => {
+          const start = startOfDay(dayDate);
+          const end = new Date(start);
+          end.setDate(start.getDate() + 1);
+          return allProgress.some(row => row.challenge_id === challenge.id && inPeriod(row, start, end));
         }).length;
 
-        const isToday = dow === todayDow;
-        const isActive = dow === activeDow;
-        const dateNum = dayDate.getDate();
-
-        const pips = challenges.map((_, i) =>
-          `<div class="day-pip${i < doneCount ? ' done' : ''}"></div>`
-        ).join('');
-
-        return `<div class="day-tab${isToday ? ' today' : ''}${isActive ? ' active' : ''}"
-          onclick="switchDay(${dow})" data-dow="${dow}">
-          <div class="day-tab-name">${DAY_NAMES[dow]}</div>
-          <div class="day-tab-date">${dateNum}</div>
-          <div class="day-tab-pips">${pips}</div>
-        </div>`;
+        const pips = challenges.map((_, index) => `<div class="day-pip${index < doneCount ? ' done' : ''}"></div>`).join('');
+        return `
+          <div class="day-tab${dow === todayDow ? ' today' : ''}${dow === activeDow ? ' active' : ''}" onclick="switchDay(${dow})" data-dow="${dow}">
+            <div class="day-tab-name">${DAY_NAMES[dow]}</div>
+            <div class="day-tab-date">${dayDate.getDate()}</div>
+            <div class="day-tab-pips">${pips}</div>
+          </div>`;
       }).join('');
 
-      // Scroll active tab into view
       const activeEl = tabs.querySelector('.day-tab.active');
       if (activeEl) activeEl.scrollIntoView({ inline: 'center', block: 'nearest' });
     }
 
-    // ── Switch to a day ──
     function switchDay(dow) {
       activeDow = dow;
       document.querySelectorAll('.day-tab').forEach(el => {
-        el.classList.toggle('active', parseInt(el.dataset.dow) === dow);
+        el.classList.toggle('active', parseInt(el.dataset.dow, 10) === dow);
       });
       renderDay(dow);
     }
 
-    // ── Render challenges for a given day ──
     function renderDay(dow) {
-      const challenges = allChallenges[dow] || [];
-      const isToday = dow === todayDow;
-      const dayName = DAY_NAMES[dow] === 'Sun' ? 'Sunday' :
-        ['', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][dow];
-
-      // Work out the date string for this day to check past completions
-      const today = new Date();
-      const weekMonday = new Date(today);
-      weekMonday.setDate(today.getDate() - ((today.getDay() + 6) % 7));
-      const dayDate = new Date(weekMonday);
-      dayDate.setDate(weekMonday.getDate() + (dow === 0 ? 6 : dow - 1));
-      const dateStr = dayDate.toISOString().split('T')[0];
-
+      const grid = document.getElementById('dayGrid');
       const heading = document.getElementById('challengeHeading');
-      const grid = document.getElementById('challengesGrid');
+      const challenges = dayPlan[dow] || [];
+      const isToday = dow === todayDow;
+      const dayName = FULL_DAY_NAMES[dow];
+      const dayDate = getWeekDate(dow);
+      const start = startOfDay(dayDate);
+      const end = new Date(start);
+      end.setDate(start.getDate() + 1);
 
       if (!challenges.length) {
-        heading.textContent = isToday ? 'Rest day — well earned.' : `Rest day on ${dayName}.`;
+        heading.textContent = isToday ? 'Rest day - well earned.' : `Rest day on ${dayName}.`;
         grid.innerHTML = `
           <div class="empty-state">
             <div class="empty-icon">😴</div>
-            <div class="empty-title">No challenges ${isToday ? 'today' : 'this day'}</div>
-            <p>${isToday ? 'Today is your rest day. Stay hydrated and get good sleep.' : `${dayName} is a rest day.`}</p>
+            <div class="empty-title">No day plan here</div>
+            <p>${isToday ? 'Use today for routines and weekly focus.' : `${dayName} has no day-specific tasks.`}</p>
           </div>`;
         return;
       }
 
-      heading.textContent = isToday ? `Today's challenges` : `${dayName}'s challenges`;
-
-      grid.innerHTML = challenges.map(c => {
-        const done = isToday
-          ? todayCompletedIds.has(c.id)
-          : allProgress.some(r => r.challenge_id === c.id && r.completed_at.startsWith(dateStr));
-
+      heading.textContent = isToday ? "Today's plan" : `${dayName}'s plan`;
+      grid.innerHTML = challenges.map(challenge => {
+        const done = allProgress.some(row => row.challenge_id === challenge.id && inPeriod(row, start, end));
         return `
-          <div class="challenge-card ${done ? 'done' : ''}" id="card-${c.id}">
+          <div class="challenge-card ${done ? 'done' : ''}" id="card-${challenge.id}">
             <div class="challenge-card-top">
-              <span class="challenge-category cat-${c.category}">${c.category}</span>
-              <span class="challenge-points">+${c.points} pts</span>
+              <span class="challenge-category cat-${challenge.category}">${challenge.category}</span>
+              <span class="challenge-points">+${challenge.points} pts</span>
             </div>
-            <div class="challenge-title">${escHtml(c.title)}</div>
-            <div class="challenge-desc">${escHtml(c.description || '')}</div>
-            ${isToday ? `<button
-              class="complete-btn ${done ? 'done' : ''}"
-              id="btn-${c.id}"
-              onclick="markComplete('${c.id}', ${c.points})"
-              ${done ? 'disabled' : ''}
-            >${done ? '✓ Done' : 'Mark complete'}</button>` : done ? `<span style="font-family:'DM Mono',monospace;font-size:12px;color:#c8f23a;">✓ Completed</span>` : ''}
+            <div class="challenge-title">${escHtml(challenge.title)}</div>
+            <div class="challenge-desc">${escHtml(challenge.description || '')}</div>
+            <div class="challenge-meta">
+              <span><strong>${done ? 'Completed' : (isToday ? 'Due today' : 'Planned for this day')}</strong></span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width:${done ? 100 : 0}%"></div></div>
+            <div class="challenge-foot">
+              <span class="progress-text">${done ? 'Done' : (isToday ? 'Ready to mark' : 'Browse only')}</span>
+              ${isToday && !done ? `<button class="complete-btn" id="btn-${challenge.id}" onclick="markComplete('${challenge.id}')">Mark complete</button>` : done ? '<span class="progress-text" style="color:#c8f23a;">✓ Complete</span>' : ''}
+            </div>
           </div>`;
       }).join('');
     }
 
-    // ── Mark a challenge complete ──
-    async function markComplete(challengeId, points) {
+    async function markComplete(challengeId) {
       const btn = document.getElementById(`btn-${challengeId}`);
-      btn.disabled = true;
-      btn.textContent = 'Saving…';
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Saving...';
+      }
 
       const { data: { session } } = await sb.auth.getSession();
       const res = await fetch(window.API_BASE + '/progress', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + session.access_token },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + session.access_token,
+        },
         body: JSON.stringify({ challenge_id: challengeId }),
       });
 
       if (res.ok || res.status === 409) {
-        todayCompletedIds.add(challengeId);
-        completedIds.add(challengeId);
-        btn.textContent = '✓ Done';
-        btn.classList.add('done');
-        document.getElementById(`card-${challengeId}`).classList.add('done');
+        await loadProgress();
+        renderEverything();
+        return;
+      }
 
-        document.getElementById('statToday').textContent = todayCompletedIds.size;
-        if (res.ok) {
-          const el = document.getElementById('statPoints');
-          el.textContent = parseInt(el.textContent || '0', 10) + points;
-        }
-        renderWeekTabs(); // refresh pips
-      } else {
+      if (btn) {
         btn.disabled = false;
         btn.textContent = 'Try again';
       }
     }
 
-    // ── Logout ──
     async function handleLogout() {
       await sb.auth.signOut();
       window.location.href = '/';
     }
 
-    // ── Helpers ──
     function escHtml(str) {
       return String(str)
-        .replace(/&/g, '&amp;').replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
     }
 
     function formatRelativeTime(date) {
-      const m = Math.round((Date.now() - date.getTime()) / 60000);
-      if (m < 1) return 'just now';
-      if (m < 60) return `${m}m ago`;
-      const h = Math.round(m / 60);
-      if (h < 24) return `${h}h ago`;
-      return `${Math.round(h / 24)}d ago`;
+      const diffMins = Math.round((Date.now() - date.getTime()) / 60000);
+      if (diffMins < 1) return 'just now';
+      if (diffMins < 60) return `${diffMins}m ago`;
+      const diffHrs = Math.round(diffMins / 60);
+      if (diffHrs < 24) return `${diffHrs}h ago`;
+      return `${Math.round(diffHrs / 24)}d ago`;
+    }
+
+    function formatTimeUntil(date) {
+      const diffMins = Math.max(0, Math.round((date.getTime() - Date.now()) / 60000));
+      if (diffMins < 60) return `${diffMins}m`;
+      const diffHrs = Math.round(diffMins / 60);
+      return `${diffHrs}h`;
     }
 
     init();
   </script>
-
 </body>
 </html>
