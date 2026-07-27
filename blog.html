@@ -27,6 +27,8 @@
     p{color:#7a9464;line-height:1.7}
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:28px}
     .card{background:#141a0f;border:1px solid #2d3d21;border-radius:16px;padding:22px}
+    .card-link{display:block;transition:border-color .2s,transform .2s}
+    .card-link:hover{border-color:#c8f23a;transform:translateY(-2px)}
     .date{font-family:'DM Mono',monospace;font-size:11px;color:#c8f23a;letter-spacing:.12em;text-transform:uppercase}
     .title{font-size:18px;font-weight:700;margin:12px 0 8px}
     .footer{border-top:1px solid #2d3d21;margin-top:24px}
@@ -44,9 +46,21 @@
     </section>
     <section class="section">
       <div class="grid">
-        <div class="card"><div class="date">2026-07-01</div><div class="title">Why water reminders work better than willpower</div><p>How spacing hydration through the day keeps energy steadier than trying to catch up at night.</p></div>
-        <div class="card"><div class="date">2026-06-24</div><div class="title">A 2-minute stretch routine you can repeat between meetings</div><p>A simple reset for shoulders, hips, and upper back without needing a gym.</p></div>
-        <div class="card"><div class="date">2026-06-17</div><div class="title">How to build a weekly posture habit that actually sticks</div><p>Why once- or twice-a-week structure is easier to keep than vague intentions.</p></div>
+        <a class="card card-link" href="/blog/water-reminders.html">
+          <div class="date">2026-07-01</div>
+          <div class="title">Why water reminders work better than willpower</div>
+          <p>How spacing hydration through the day keeps energy steadier than trying to catch up at night.</p>
+        </a>
+        <a class="card card-link" href="/blog/stretch-routine.html">
+          <div class="date">2026-06-24</div>
+          <div class="title">A 2-minute stretch routine you can repeat between meetings</div>
+          <p>A simple reset for shoulders, hips, and upper back without needing a gym.</p>
+        </a>
+        <a class="card card-link" href="/blog/posture-habit.html">
+          <div class="date">2026-06-17</div>
+          <div class="title">How to build a weekly posture habit that actually sticks</div>
+          <p>Why once- or twice-a-week structure is easier to keep than vague intentions.</p>
+        </a>
       </div>
     </section>
   </main>
