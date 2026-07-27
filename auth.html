@@ -238,8 +238,8 @@
     const { createClient } = window.supabase;
     const sb = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
 
-    // ── Redirect if already logged in ──
-    sb.auth.getSession().then(({ data: { session } }) => {
+    // ── Redirect when session is available (handles normal login + email confirmation callback) ──
+    sb.auth.onAuthStateChange((event, session) => {
       if (session) window.location.href = '/dashboard.html';
     });
 
@@ -328,7 +328,11 @@
       const email = document.getElementById('signupEmail').value.trim();
       const password = document.getElementById('signupPassword').value;
 
-      const { error } = await sb.auth.signUp({ email, password });
+      const { error } = await sb.auth.signUp({
+        email,
+        password,
+        options: { emailRedirectTo: 'https://deskwarriorfit.com/auth.html' },
+      });
 
       if (error) {
         showError(error.message);
