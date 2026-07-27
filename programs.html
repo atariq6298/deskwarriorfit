@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programs — DeskWarriorFit</title>
+  <meta name="description" content="Move, Recover, and Fuel programs designed for desk workers.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    body{margin:0;font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#0d1209;color:#ede8df}
+    a{text-decoration:none;color:inherit}
+    .nav,.footer{border-color:#2d3d21;background:rgba(13,18,9,.93);backdrop-filter:blur(16px)}
+    .nav{position:sticky;top:0;border-bottom:1px solid #2d3d21}
+    .inner{max-width:1100px;margin:0 auto;padding:0 24px}
+    .nav .inner{height:64px;display:flex;align-items:center;justify-content:space-between}
+    .logo{display:flex;gap:10px;align-items:center}
+    .badge{width:32px;height:32px;border-radius:7px;background:#c8f23a;color:#0d1209;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace}
+    .name{font-family:'Fraunces',Georgia,serif;font-weight:700}
+    .link{color:#7a9464;font-size:14px;margin-left:18px}
+    .hero,.section{max-width:1100px;margin:0 auto;padding:56px 24px}
+    .kicker{font-family:'DM Mono',monospace;color:#c8f23a;letter-spacing:.14em;text-transform:uppercase;font-size:11px}
+    h1,h2{font-family:'Fraunces',Georgia,serif;line-height:1.05}
+    h1{font-size:clamp(40px,6vw,72px);margin:14px 0 18px}
+    h2{font-size:clamp(28px,4vw,42px);margin:0 0 16px}
+    p{color:#7a9464;line-height:1.7}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:28px}
+    .card{background:#141a0f;border:1px solid #2d3d21;border-radius:16px;padding:22px}
+    .num{font-family:'DM Mono',monospace;color:#c8f23a;font-size:11px;letter-spacing:.12em}
+    .title{font-size:18px;font-weight:700;margin:12px 0 8px}
+    .footer{border-top:1px solid #2d3d21;margin-top:24px}
+    .footer .inner{padding:24px 24px 36px}
+    .links{display:flex;flex-wrap:wrap;gap:12px 18px;margin:16px 0;color:#7a9464;font-size:14px}
+    .cta{display:inline-block;margin-top:14px;background:#c8f23a;color:#0d1209;padding:12px 18px;border-radius:10px;font-weight:700}
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <div class="inner">
+      <a class="logo" href="/"><div class="badge">DW</div><div class="name">DeskWarriorFit</div></a>
+      <div>
+        <a class="link" href="/science.html">Science</a>
+        <a class="link" href="/community.html">Community</a>
+        <a class="link" href="/blog.html">Blog</a>
+        <a class="link" href="/auth.html">Log In</a>
+      </div>
+    </div>
+  </div>
+  <main>
+    <section class="hero">
+      <div class="kicker">Programs</div>
+      <h1>Move, Recover, Fuel.</h1>
+      <p>The program library is organized around the way desk work actually feels: stiffness, screen fatigue, energy dips, and the need for habits that fit between meetings.</p>
+    </section>
+    <section class="section">
+      <h2>Move</h2>
+      <p>Quick mobility and strength breaks for hips, shoulders, back, and posture.</p>
+      <div class="grid">
+        <div class="card"><div class="num">MOVE 01</div><div class="title">Stretch Break</div><p>Two daily reset sessions for tight necks, shoulders, and hips.</p></div>
+        <div class="card"><div class="num">MOVE 02</div><div class="title">Lower Body Strength</div><p>Bodyweight work twice a week to support sitting-heavy routines.</p></div>
+        <div class="card"><div class="num">MOVE 03</div><div class="title">Core & Upper Back</div><p>Once-a-week stabilizing work for posture and desk resilience.</p></div>
+      </div>
+    </section>
+    <section class="section">
+      <h2>Recover</h2>
+      <p>Habits that reduce strain from screens and long work blocks.</p>
+      <div class="grid">
+        <div class="card"><div class="num">RECOVER 01</div><div class="title">Posture Correction</div><p>Weekly drills that help your body remember better stack and alignment.</p></div>
+        <div class="card"><div class="num">RECOVER 02</div><div class="title">Eye + Screen Breaks</div><p>Micro-breaks that reduce fatigue and keep focus steady.</p></div>
+        <div class="card"><div class="num">RECOVER 03</div><div class="title">Wind-Down Routine</div><p>Evening reset cues to make sleep easier after a long day.</p></div>
+      </div>
+    </section>
+    <section class="section">
+      <h2>Fuel</h2>
+      <p>Hydration and meal timing routines that keep energy stable.</p>
+      <div class="grid">
+        <div class="card"><div class="num">FUEL 01</div><div class="title">Drink Water</div><p>Every 3 hours, with reminders spaced through the workday.</p></div>
+        <div class="card"><div class="num">FUEL 02</div><div class="title">Snack Swap</div><p>Swap one processed snack for something steadier and more filling.</p></div>
+        <div class="card"><div class="num">FUEL 03</div><div class="title">Lunch Timing</div><p>Simple food timing prompts to avoid the 3pm crash.</p></div>
+      </div>
+      <a class="cta" href="/auth.html#signup">Start Free</a>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="inner">
+      <div class="name">DeskWarriorFit</div>
+      <div class="links">
+        <a href="/science.html">Science</a><a href="/community.html">Community</a><a href="/blog.html">Blog</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a>
+      </div>
+      <div style="color:#7a9464;font-size:13px">© 2026 deskwarriorfit.com</div>
+    </div>
+  </footer>
+</body>
+</html>
