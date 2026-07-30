@@ -5,6 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DeskWarriorFit — Fitness for Desk Workers</title>
   <meta name="description" content="Built for people who sit 8 hours a day. DeskWarriorFit gives desk workers the tools to move, recover, and fuel — without quitting their job.">
+  <link rel="canonical" href="https://deskwarriorfit.com/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://deskwarriorfit.com/">
+  <meta property="og:site_name" content="DeskWarriorFit">
+  <meta property="og:title" content="DeskWarriorFit — Fitness for Desk Workers">
+  <meta property="og:description" content="Built for people who sit 8 hours a day. DeskWarriorFit gives desk workers the tools to move, recover, and fuel — without quitting their job.">
+  <meta property="og:image" content="https://deskwarriorfit.com/og-image.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DeskWarriorFit — Fitness for Desk Workers">
+  <meta name="twitter:description" content="Built for people who sit 8 hours a day. DeskWarriorFit gives desk workers the tools to move, recover, and fuel — without quitting their job.">
+
+  <!-- JSON-LD structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "DeskWarriorFit",
+    "url": "https://deskwarriorfit.com/",
+    "description": "Built for people who sit 8 hours a day. DeskWarriorFit gives desk workers the tools to move, recover, and fuel — without quitting their job.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "DeskWarriorFit",
+      "url": "https://deskwarriorfit.com/"
+    }
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -776,8 +807,43 @@
       margin-top: 2px;
     }
 
+    /* ── FAQ ── */
+    .faq-item {
+      border-bottom: 1px solid #2d3d21;
+    }
+    .faq-q {
+      list-style: none;
+      padding: 22px 0;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      color: #ede8df;
+      transition: color 0.2s;
+    }
+    .faq-q::-webkit-details-marker { display: none; }
+    .faq-q::after {
+      content: '+';
+      font-family: 'DM Mono', monospace;
+      font-size: 18px;
+      color: #c8f23a;
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    details[open] .faq-q::after { transform: rotate(45deg); }
+    details[open] .faq-q { color: #c8f23a; }
+    .faq-a {
+      font-size: 15px;
+      line-height: 1.72;
+      color: #7a9464;
+      padding-bottom: 22px;
+      margin: 0;
+    }
+
     /* ── CTA ── */
-    .cta-section {
       padding: clamp(64px, 8vw, 112px) 24px;
       background-color: #141a0f;
       border-top: 1px solid #2d3d21;
@@ -1013,12 +1079,12 @@
 
       <div class="hero-stats">
         <div>
-          <div class="hero-stat-value">12k+</div>
-          <div class="hero-stat-label">Warriors enrolled</div>
+          <div class="hero-stat-value">Founding</div>
+          <div class="hero-stat-label">Be one of the first warriors</div>
         </div>
         <div>
-          <div class="hero-stat-value">89%</div>
-          <div class="hero-stat-label">Less back pain</div>
+          <div class="hero-stat-value">Built</div>
+          <div class="hero-stat-label">To reduce desk-worker back pain</div>
         </div>
         <div>
           <div class="hero-stat-value">6 min</div>
@@ -1048,8 +1114,8 @@
   </section>
 
   <!-- ── Marquee strip ── -->
-  <div class="marquee-strip">
-    <div class="marquee-track">
+  <div class="marquee-strip" role="marquee" aria-label="Move Daily · Reduce Pain · Focus Better · Sleep Deeper · Fuel Smarter">
+    <div class="marquee-track" aria-hidden="true">
       <span class="marquee-item">Move Daily</span>
       <span class="marquee-item">Reduce Pain</span>
       <span class="marquee-item">Focus Better</span>
@@ -1262,6 +1328,54 @@
     </div>
   </div>
 
+  <!-- ── Founder note ── -->
+  <div class="section" style="padding-top:0">
+    <div style="background-color:#141a0f;border:1px solid #2d3d21;border-radius:20px;padding:clamp(32px,5vw,56px);max-width:720px;margin:0 auto">
+      <div class="section-label mb16">From the founder</div>
+      <blockquote style="font-family:'Fraunces',Georgia,serif;font-size:clamp(20px,2.8vw,30px);font-weight:700;font-style:italic;line-height:1.2;letter-spacing:-0.02em;margin-bottom:20px;color:#ede8df">
+        "I built this because stretching apps made me feel guilty — and gym plans made me feel like a failure. This one is just for people sitting at a desk all day."
+      </blockquote>
+      <div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#c8f23a">DeskWarriorFit · Founder</div>
+      <p style="margin-top:14px;font-size:14px;color:#7a9464;line-height:1.65">
+        DeskWarriorFit is in early access. If you join now you're one of the first warriors — and your feedback directly shapes what gets built next.
+      </p>
+    </div>
+  </div>
+
+  <!-- ── FAQ ── -->
+  <div class="section" id="faq" style="padding-top:clamp(64px,8vw,96px)">
+    <div style="margin-bottom:48px">
+      <div class="section-label mb16">FAQ</div>
+      <h2 style="font-size:clamp(30px,4vw,50px)">Common questions.</h2>
+    </div>
+    <div id="faqList" style="max-width:720px;border-top:1px solid #2d3d21">
+      <details class="faq-item">
+        <summary class="faq-q">Does this work if I already have back pain?</summary>
+        <p class="faq-a">Yes — the routines are designed for desk workers dealing with existing tightness, not athletes starting from zero. Start with the Recover pillar: posture drills and tension-release habits that work even on bad days. Always check with a healthcare provider if your pain is acute.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Do I need any equipment?</summary>
+        <p class="faq-a">No. Every routine works at your desk, in your chair, or standing. Nothing to buy, nothing to carry, nothing that requires a changing room.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">How much time does this actually take each day?</summary>
+        <p class="faq-a">The minimum is 6 minutes — split across two 3-minute movement breaks. Some routines are longer if you want them, but you can get real benefit from the short version. It's designed to slot between meetings, not replace them.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Is it really free? What's the catch?</summary>
+        <p class="faq-a">Free during early access — no credit card, no trial expiry, no bait-and-switch. A paid tier may come later for advanced features, but the core daily challenges and tracking will stay free.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">What if I miss a day?</summary>
+        <p class="faq-a">Nothing bad happens. There's no punishment for missing a day — the streak resets, and you start fresh tomorrow. Consistency over weeks matters more than perfection on any given day.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">How is this different from a stretching app or YouTube?</summary>
+        <p class="faq-a">DeskWarriorFit is built around the three desk-work pain points (Move, Recover, Fuel) as a connected system, not a library of random videos. The daily check-in keeps you accountable without guilt, and the plan adapts to your schedule — not the other way around.</p>
+      </details>
+    </div>
+  </div>
+
   <!-- ── Email CTA ── -->
   <section id="start" class="cta-section">
     <div class="cta-inner">
@@ -1304,6 +1418,7 @@
         <a href="/programs.html" class="footer-link">Programs</a>
         <a href="/science.html" class="footer-link">Science</a>
         <a href="/community.html" class="footer-link">Community</a>
+        <a href="/pricing.html" class="footer-link">Pricing</a>
         <a href="/privacy.html" class="footer-link">Privacy</a>
         <a href="/terms.html" class="footer-link">Terms</a>
       </div>
@@ -1332,13 +1447,24 @@
 
     // Email CTA form
     const ctaForm = document.getElementById('ctaForm');
-    const ctaSuccess = document.getElementById('ctaSuccess');
 
     ctaForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const email = document.getElementById('ctaEmail').value;
       window.location.href = '/auth.html#signup?' + new URLSearchParams({ email }).toString();
     });
+
+    // Nav active state
+    (function() {
+      const path = window.location.pathname.replace(/\/?$/, '') || '/';
+      document.querySelectorAll('.nav-link[href]').forEach(a => {
+        const href = a.getAttribute('href').replace(/\/?$/, '') || '/';
+        if (href === path || (href !== '/' && path.startsWith(href))) {
+          a.setAttribute('aria-current', 'page');
+          a.style.color = '#ede8df';
+        }
+      });
+    })();
   </script>
 
 </body>

@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Programs — DeskWarriorFit</title>
   <meta name="description" content="Move, Recover, and Fuel programs designed for desk workers.">
+  <link rel="canonical" href="https://deskwarriorfit.com/programs.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://deskwarriorfit.com/programs.html">
+  <meta property="og:site_name" content="DeskWarriorFit">
+  <meta property="og:title" content="Programs — DeskWarriorFit">
+  <meta property="og:description" content="Move, Recover, and Fuel programs designed for desk workers. No gym, no gear.">
+  <meta property="og:image" content="https://deskwarriorfit.com/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Programs — DeskWarriorFit">
+  <meta name="twitter:description" content="Move, Recover, and Fuel programs designed for desk workers. No gym, no gear.">
+  <meta name="twitter:image" content="https://deskwarriorfit.com/og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -80,16 +91,28 @@
         <div class="card"><div class="num">FUEL 03</div><div class="title">Lunch Timing</div><p>Simple food timing prompts to avoid the 3pm crash.</p></div>
       </div>
       <a class="cta" href="/auth.html#signup">Start Free</a>
+      <p style="margin-top:12px;font-size:13px;color:#7a9464">No credit card. <a href="/pricing.html" style="color:#c8f23a">See what's included →</a></p>
     </section>
   </main>
   <footer class="footer">
     <div class="inner">
       <div class="name">DeskWarriorFit</div>
       <div class="links">
-        <a href="/science.html">Science</a><a href="/community.html">Community</a><a href="/blog.html">Blog</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a>
+        <a href="/science.html">Science</a><a href="/community.html">Community</a><a href="/blog.html">Blog</a><a href="/pricing.html">Pricing</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a>
       </div>
       <div style="color:#7a9464;font-size:13px">© 2026 deskwarriorfit.com</div>
     </div>
   </footer>
+  <script>
+    (function() {
+      const path = window.location.pathname.replace(/\/?$/, '') || '/';
+      document.querySelectorAll('.link[href], .nav-link[href]').forEach(a => {
+        const href = a.getAttribute('href').replace(/\/?$/, '') || '/';
+        if (href === path || (href !== '/' && path.startsWith(href))) {
+          a.setAttribute('aria-current', 'page');
+          a.style.color = '#ede8df';
+        }
+      });
+    })();
+  </script>
 </body>
-</html>

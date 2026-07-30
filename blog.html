@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blog — DeskWarriorFit</title>
   <meta name="description" content="Practical posts for desk workers: movement, recovery, and fuel.">
+  <link rel="canonical" href="https://deskwarriorfit.com/blog.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://deskwarriorfit.com/blog.html">
+  <meta property="og:site_name" content="DeskWarriorFit">
+  <meta property="og:title" content="Blog — DeskWarriorFit">
+  <meta property="og:description" content="Practical posts for desk workers: movement, recovery, and fuel.">
+  <meta property="og:image" content="https://deskwarriorfit.com/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Blog — DeskWarriorFit">
+  <meta name="twitter:description" content="Practical posts for desk workers: movement, recovery, and fuel.">
+  <meta name="twitter:image" content="https://deskwarriorfit.com/og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -50,20 +61,34 @@
           <div class="date">2026-07-01</div>
           <div class="title">Why water reminders work better than willpower</div>
           <p>How spacing hydration through the day keeps energy steadier than trying to catch up at night.</p>
+          <div style="margin-top:14px"><span style="display:inline-block;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:#1e2a14;color:#c8f23a;border:1px solid #2d3d21;border-radius:4px;padding:3px 8px">Fuel</span></div>
         </a>
         <a class="card card-link" href="/blog/stretch-routine.html">
           <div class="date">2026-06-24</div>
           <div class="title">A 2-minute stretch routine you can repeat between meetings</div>
           <p>A simple reset for shoulders, hips, and upper back without needing a gym.</p>
+          <div style="margin-top:14px"><span style="display:inline-block;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:#1e2a14;color:#c8f23a;border:1px solid #2d3d21;border-radius:4px;padding:3px 8px">Move</span></div>
         </a>
         <a class="card card-link" href="/blog/posture-habit.html">
           <div class="date">2026-06-17</div>
           <div class="title">How to build a weekly posture habit that actually sticks</div>
           <p>Why once- or twice-a-week structure is easier to keep than vague intentions.</p>
+          <div style="margin-top:14px"><span style="display:inline-block;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:#1e2a14;color:#c8f23a;border:1px solid #2d3d21;border-radius:4px;padding:3px 8px">Recover</span></div>
         </a>
       </div>
     </section>
   </main>
   <footer class="footer"><div class="inner"><div class="name">DeskWarriorFit</div><div class="links"><a href="/programs.html">Programs</a><a href="/science.html">Science</a><a href="/community.html">Community</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></div><div style="color:#7a9464;font-size:13px">© 2026 deskwarriorfit.com</div></div></footer>
+  <script>
+    (function() {
+      const path = window.location.pathname.replace(/\/?$/, '') || '/';
+      document.querySelectorAll('.link[href], .nav-link[href]').forEach(a => {
+        const href = a.getAttribute('href').replace(/\/?$/, '') || '/';
+        if (href === path || (href !== '/' && path.startsWith(href))) {
+          a.setAttribute('aria-current', 'page');
+          a.style.color = '#ede8df';
+        }
+      });
+    })();
+  </script>
 </body>
-</html>
