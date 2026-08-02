@@ -1,0 +1,186 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675">
+  <defs>
+    <radialGradient id="bg4" cx="40%" cy="50%" r="65%">
+      <stop offset="0%" stop-color="#141e0e"/>
+      <stop offset="100%" stop-color="#0d1209"/>
+    </radialGradient>
+    <filter id="softShadow">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#bg4)"/>
+
+  <!-- Desk surface -->
+  <rect x="0" y="440" width="1200" height="235" fill="#0a0f07"/>
+  <line x1="0" y1="440" x2="1200" y2="440" stroke="#1a2416" stroke-width="2"/>
+
+  <!-- Notebook (open, two-page spread) -->
+  <g filter="url(#softShadow)">
+    <!-- Left page -->
+    <rect x="160" y="80" width="390" height="480" rx="4" fill="#f5f0e8"/>
+    <!-- Right page -->
+    <rect x="550" y="80" width="390" height="480" rx="4" fill="#f0ebe3"/>
+    <!-- Binding fold shadow -->
+    <rect x="546" y="80" width="8" height="480" fill="#d4cfc7"/>
+    <!-- Binding line -->
+    <line x1="550" y1="80" x2="550" y2="560" stroke="#c8c3bb" stroke-width="2"/>
+  </g>
+
+  <!-- Notebook cover remnant (slightly visible top left) -->
+  <rect x="158" y="78" width="6" height="484" rx="3" fill="#1a2612" stroke="#2d3d21" stroke-width="1"/>
+
+  <!-- LEFT PAGE - Trigger & Action planning -->
+  <!-- Ruled lines (left page) -->
+  <g stroke="#e0dbd3" stroke-width="0.8">
+    <line x1="168" y1="140" x2="532" y2="140"/>
+    <line x1="168" y1="162" x2="532" y2="162"/>
+    <line x1="168" y1="184" x2="532" y2="184"/>
+    <line x1="168" y1="206" x2="532" y2="206"/>
+    <line x1="168" y1="228" x2="532" y2="228"/>
+    <line x1="168" y1="250" x2="532" y2="250"/>
+    <line x1="168" y1="272" x2="532" y2="272"/>
+    <line x1="168" y1="294" x2="532" y2="294"/>
+    <line x1="168" y1="316" x2="532" y2="316"/>
+    <line x1="168" y1="338" x2="532" y2="338"/>
+    <line x1="168" y1="360" x2="532" y2="360"/>
+    <line x1="168" y1="382" x2="532" y2="382"/>
+    <line x1="168" y1="404" x2="532" y2="404"/>
+    <line x1="168" y1="426" x2="532" y2="426"/>
+    <line x1="168" y1="448" x2="532" y2="448"/>
+    <line x1="168" y1="470" x2="532" y2="470"/>
+    <line x1="168" y1="492" x2="532" y2="492"/>
+    <line x1="168" y1="514" x2="532" y2="514"/>
+    <line x1="168" y1="536" x2="532" y2="536"/>
+  </g>
+  <!-- Red margin line -->
+  <line x1="210" y1="80" x2="210" y2="560" stroke="#f0a0a0" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- Left page header -->
+  <text x="220" y="120" font-family="Georgia,serif" font-size="18" fill="#2d4a1e" font-weight="bold">My Posture Habit Plan</text>
+
+  <!-- Handwritten-style text (left page) -->
+  <text x="220" y="155" font-family="Georgia,serif" font-size="14" fill="#3d3020">TRIGGER:</text>
+  <text x="220" y="177" font-family="Georgia,serif" font-size="13" fill="#4a3d28">Monday after closing weekly</text>
+  <text x="220" y="199" font-family="Georgia,serif" font-size="13" fill="#4a3d28">planning doc ~9:30am</text>
+
+  <line x1="220" y1="216" x2="520" y2="216" stroke="#c8f23a" stroke-width="2" opacity="0.6"/>
+
+  <text x="220" y="238" font-family="Georgia,serif" font-size="14" fill="#3d3020">ACTION (tiny version):</text>
+  <text x="220" y="260" font-family="Georgia,serif" font-size="13" fill="#4a3d28">1 doorway chest stretch/side</text>
+  <text x="220" y="282" font-family="Georgia,serif" font-size="13" fill="#4a3d28">+ 10 wall angels</text>
+  <text x="220" y="304" font-family="Georgia,serif" font-size="13" fill="#4a3d28">(5 min max)</text>
+
+  <line x1="220" y1="320" x2="520" y2="320" stroke="#c8f23a" stroke-width="2" opacity="0.6"/>
+
+  <text x="220" y="342" font-family="Georgia,serif" font-size="14" fill="#3d3020">FULL VERSION (good weeks):</text>
+  <text x="220" y="364" font-family="Georgia,serif" font-size="13" fill="#4a3d28">+ Chin tucks x10</text>
+  <text x="220" y="386" font-family="Georgia,serif" font-size="13" fill="#4a3d28">+ Hip flexor stretch</text>
+  <text x="220" y="408" font-family="Georgia,serif" font-size="13" fill="#4a3d28">+ Glute squeeze x10</text>
+  <text x="220" y="430" font-family="Georgia,serif" font-size="13" fill="#4a3d28">(8 min total)</text>
+
+  <line x1="220" y1="447" x2="520" y2="447" stroke="#c8f23a" stroke-width="2" opacity="0.6"/>
+
+  <text x="220" y="469" font-family="Georgia,serif" font-size="14" fill="#3d3020">TRACKER:</text>
+  <!-- Mini checkboxes -->
+  <rect x="220" y="478" width="14" height="14" rx="2" fill="none" stroke="#5a7a44" stroke-width="1.5"/>
+  <path d="M 222 485 L 226 490 L 233 481" stroke="#5a7a44" stroke-width="2" fill="none"/>
+  <text x="242" y="491" font-family="Georgia,serif" font-size="13" fill="#4a3d28">W1 — Mon check &#x2713;</text>
+
+  <rect x="220" y="500" width="14" height="14" rx="2" fill="none" stroke="#5a7a44" stroke-width="1.5"/>
+  <path d="M 222 507 L 226 512 L 233 503" stroke="#5a7a44" stroke-width="2" fill="none"/>
+  <text x="242" y="513" font-family="Georgia,serif" font-size="13" fill="#4a3d28">W1 — Wed check &#x2713;</text>
+
+  <rect x="220" y="522" width="14" height="14" rx="2" fill="none" stroke="#9a9090" stroke-width="1.5"/>
+  <text x="242" y="535" font-family="Georgia,serif" font-size="13" fill="#9a8878">W2 — add 2nd session</text>
+
+  <!-- Star doodle -->
+  <text x="490" y="120" font-family="sans-serif" font-size="24" fill="#c8a020" opacity="0.7">&#x2605;</text>
+  <text x="465" y="145" font-family="Georgia,serif" font-size="11" fill="#8a7040" font-style="italic">start small!</text>
+
+  <!-- RIGHT PAGE - 4-week progression -->
+  <!-- Ruled lines (right page) -->
+  <g stroke="#e0dbd3" stroke-width="0.8">
+    <line x1="558" y1="140" x2="932" y2="140"/>
+    <line x1="558" y1="162" x2="932" y2="162"/>
+    <line x1="558" y1="184" x2="932" y2="184"/>
+    <line x1="558" y1="206" x2="932" y2="206"/>
+    <line x1="558" y1="228" x2="932" y2="228"/>
+    <line x1="558" y1="250" x2="932" y2="250"/>
+    <line x1="558" y1="272" x2="932" y2="272"/>
+    <line x1="558" y1="294" x2="932" y2="294"/>
+    <line x1="558" y1="316" x2="932" y2="316"/>
+    <line x1="558" y1="338" x2="932" y2="338"/>
+    <line x1="558" y1="360" x2="932" y2="360"/>
+    <line x1="558" y1="382" x2="932" y2="382"/>
+    <line x1="558" y1="404" x2="932" y2="404"/>
+    <line x1="558" y1="426" x2="932" y2="426"/>
+    <line x1="558" y1="448" x2="932" y2="448"/>
+    <line x1="558" y1="470" x2="932" y2="470"/>
+    <line x1="558" y1="492" x2="932" y2="492"/>
+    <line x1="558" y1="514" x2="932" y2="514"/>
+    <line x1="558" y1="536" x2="932" y2="536"/>
+  </g>
+  <!-- Red margin (right page) -->
+  <line x1="600" y1="80" x2="600" y2="560" stroke="#f0a0a0" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- Right page header -->
+  <text x="610" y="120" font-family="Georgia,serif" font-size="18" fill="#2d4a1e" font-weight="bold">4-Week Progression</text>
+
+  <!-- Week blocks -->
+  <!-- Week 1 -->
+  <rect x="608" y="148" width="314" height="82" rx="6" fill="#e8efe0" stroke="#b0c890" stroke-width="1"/>
+  <text x="620" y="170" font-family="Georgia,serif" font-size="13" fill="#2d4a1e" font-weight="bold">Week 1 — Prove it fits</text>
+  <text x="620" y="188" font-family="Georgia,serif" font-size="12" fill="#4a6030">1 session · tiny action only</text>
+  <text x="620" y="206" font-family="Georgia,serif" font-size="12" fill="#4a6030">Goal: trigger &#x2192; action &#x2192; track once</text>
+  <text x="620" y="224" font-family="Georgia,serif" font-size="11" fill="#6a8040" font-style="italic">If it felt easy, it worked ✓</text>
+
+  <!-- Week 2 -->
+  <rect x="608" y="242" width="314" height="82" rx="6" fill="#e8efe0" stroke="#b0c890" stroke-width="1"/>
+  <text x="620" y="264" font-family="Georgia,serif" font-size="13" fill="#2d4a1e" font-weight="bold">Week 2 — Add a session</text>
+  <text x="620" y="282" font-family="Georgia,serif" font-size="12" fill="#4a6030">2 sessions · still tiny</text>
+  <text x="620" y="300" font-family="Georgia,serif" font-size="12" fill="#4a6030">Pick a different trigger day</text>
+  <text x="620" y="318" font-family="Georgia,serif" font-size="11" fill="#6a8040" font-style="italic">Mon + Wed works great</text>
+
+  <!-- Week 3 -->
+  <rect x="608" y="336" width="314" height="82" rx="6" fill="#eaf5e0" stroke="#8aba50" stroke-width="1.5"/>
+  <text x="620" y="358" font-family="Georgia,serif" font-size="13" fill="#1e3a14" font-weight="bold">Week 3 — Expand menu</text>
+  <text x="620" y="376" font-family="Georgia,serif" font-size="12" fill="#3a5020">2 sessions · add 1 new drill each</text>
+  <text x="620" y="394" font-family="Georgia,serif" font-size="12" fill="#3a5020">Try hip flexor or chin tucks</text>
+  <text x="620" y="412" font-family="Georgia,serif" font-size="11" fill="#5a7030" font-style="italic">Should feel like 6–8 mins now</text>
+
+  <!-- Week 4 -->
+  <rect x="608" y="430" width="314" height="82" rx="6" fill="#daf0c0" stroke="#6ab030" stroke-width="2"/>
+  <text x="620" y="452" font-family="Georgia,serif" font-size="13" fill="#1a3010" font-weight="bold">Week 4 — Lock the identity</text>
+  <text x="620" y="470" font-family="Georgia,serif" font-size="12" fill="#2a4818">Review tracker — 3/4 weeks?</text>
+  <text x="620" y="488" font-family="Georgia,serif" font-size="12" fill="#2a4818">You are now "someone who does this"</text>
+  <text x="620" y="506" font-family="Georgia,serif" font-size="11" fill="#4a6828" font-style="italic">Scale up or maintain ✓</text>
+
+  <!-- Arrow progression -->
+  <text x="930" y="192" font-family="sans-serif" font-size="20" fill="#6a9050">&#x25BA;</text>
+  <text x="930" y="286" font-family="sans-serif" font-size="20" fill="#6a9050">&#x25BA;</text>
+  <text x="930" y="380" font-family="sans-serif" font-size="20" fill="#7ab060">&#x25BA;</text>
+  <text x="930" y="474" font-family="sans-serif" font-size="20" fill="#c8f23a">&#x25BA;</text>
+
+  <!-- Pen resting on page -->
+  <rect x="940" y="200" width="12" height="280" rx="6" fill="#3d2010" transform="rotate(8, 946, 340)"/>
+  <rect x="939" y="468" width="14" height="20" rx="2" fill="#c8a020" transform="rotate(8, 946, 478)"/>
+  <rect x="944" y="196" width="4" height="10" rx="2" fill="#e0e0e0" transform="rotate(8, 946, 201)"/>
+
+  <!-- Page numbers -->
+  <text x="532" y="556" font-family="Georgia,serif" font-size="12" fill="#9a9090" text-anchor="middle">14</text>
+  <text x="728" y="556" font-family="Georgia,serif" font-size="12" fill="#9a9090" text-anchor="middle">15</text>
+
+  <!-- Right side: coffee cup on desk -->
+  <rect x="1000" y="380" width="80" height="62" rx="6" fill="#141a0f" stroke="#2d3d21" stroke-width="1.5"/>
+  <!-- Coffee surface -->
+  <ellipse cx="1040" cy="382" rx="36" ry="8" fill="#2a1a0a"/>
+  <!-- Handle -->
+  <path d="M 1080 395 Q 1110 395 1110 415 Q 1110 435 1080 435" stroke="#1a2612" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- Coffee top -->
+  <ellipse cx="1040" cy="382" rx="34" ry="7" fill="#3d2210"/>
+  <!-- Steam wisps -->
+  <path d="M 1025 374 Q 1022 360 1025 350" stroke="#7a9464" stroke-width="1.5" fill="none" opacity="0.5" stroke-linecap="round"/>
+  <path x="0" y="0" d="M 1040 371 Q 1037 357 1040 347" stroke="#7a9464" stroke-width="1.5" fill="none" opacity="0.5" stroke-linecap="round"/>
+  <path d="M 1055 374 Q 1052 360 1055 350" stroke="#7a9464" stroke-width="1.5" fill="none" opacity="0.5" stroke-linecap="round"/>
+</svg>
