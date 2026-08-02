@@ -358,10 +358,11 @@
         });
         const checkData = await checkRes.json();
         if (checkData.exists) {
+          document.getElementById('loginEmail').value = email;
+          switchTab('login');
           showError('An account with this email already exists. Please log in.');
           btn.disabled = false;
           btn.textContent = 'Create Account →';
-          setTimeout(() => switchTab('login'), 1500);
           return;
         }
       } catch (err) {
@@ -386,10 +387,11 @@
       } else if (!data.user) {
         // Supabase returns a null user for existing confirmed accounts to avoid
         // leaking whether the email exists. Treat this the same as a duplicate.
+        document.getElementById('loginEmail').value = email;
+        switchTab('login');
         showError('An account with this email already exists. Please log in.');
         btn.disabled = false;
         btn.textContent = 'Create Account →';
-        setTimeout(() => switchTab('login'), 1500);
       } else {
         showSuccess('Account created! Check your email to confirm, then log in.');
         document.getElementById('formSignup').reset();
