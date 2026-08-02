@@ -281,7 +281,20 @@
 
     function showError(msg) {
       const el = document.getElementById('msgError');
-      el.textContent = msg;
+      let text = '';
+      if (typeof msg === 'string') {
+        text = msg;
+      } else if (msg && typeof msg.message === 'string') {
+        text = msg.message;
+      } else if (msg && typeof msg.error_description === 'string') {
+        text = msg.error_description;
+      } else if (msg && typeof msg.code === 'string') {
+        text = msg.code;
+      }
+      if (!text || text === '{}') {
+        text = 'Something went wrong. Please try again.';
+      }
+      el.textContent = text;
       el.classList.add('show');
       document.getElementById('msgSuccess').classList.remove('show');
     }
@@ -329,16 +342,49 @@
       const email = document.getElementById('signupEmail').value.trim();
       const password = document.getElementById('signupPassword').value;
 
-      const { error } = await sb.auth.signUp({
+      if (password.length < 8) {
+        showError('Password must be at least 8 characters.');
+        btn.disabled = false;
+        btn.textContent = 'Create Account →';
+        return;
+      }
+
+      // Prevent duplicate signups by checking auth.users first.
+      try {
+        const checkRes = await fetch(`${window.SUPABASE_URL}/functions/v1/check-email`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'apikey': window.SUPABASE_ANON_KEY },
+          body: JSON.stringify({ email })
+        });
+        const checkData = await checkRes.json();
+        if (checkData.exists) {
+          showError('An account with this email already exists. Please log in.');
+          btn.disabled = false;
+          btn.textContent = 'Create Account →';
+          setTimeout(() => switchTab('login'), 1500);
+          return;
+        }
+      } catch (err) {
+        console.error('Email availability check failed:', err);
+      }
+
+      const { data, error } = await sb.auth.signUp({
         email,
         password,
         options: { emailRedirectTo: 'https://deskwarriorfit.com/auth.html' },
       });
 
       if (error) {
-        showError(error.message);
+        showError(error);
         btn.disabled = false;
         btn.textContent = 'Create Account →';
+      } else if (!data.user) {
+        // Supabase returns a null user for existing confirmed accounts to avoid
+        // leaking whether the email exists. Treat this the same as a duplicate.
+        showError('An account with this email already exists. Please log in.');
+        btn.disabled = false;
+        btn.textContent = 'Create Account →';
+        setTimeout(() => switchTab('login'), 1500);
       } else {
         showSuccess('Account created! Check your email to confirm, then log in.');
         document.getElementById('formSignup').reset();
