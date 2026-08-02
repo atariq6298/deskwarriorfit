@@ -375,7 +375,12 @@
       });
 
       if (error) {
-        showError(error);
+        const status = error.status || error.__type || '';
+        if (status === 500 || status === 503) {
+          showError('Our sign-up service is temporarily unavailable. Please try again later.');
+        } else {
+          showError(error);
+        }
         btn.disabled = false;
         btn.textContent = 'Create Account →';
       } else if (!data.user) {
