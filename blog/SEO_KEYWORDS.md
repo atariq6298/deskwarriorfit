@@ -1,5 +1,12 @@
 # Blog SEO keyword reference
 
+## Desk stretch routine
+
+- **Primary keyword:** desk stretches for office workers
+- **Secondary keywords:** desk stretch routine; office stretches; workday movement break
+
+Use these phrases naturally in the desk stretch guide and relevant internal links. Keep the advice practical and safe; avoid keyword stuffing or unsupported health claims.
+
 ## Computer eye strain guide
 
 - **Primary keyword:** computer eye strain
