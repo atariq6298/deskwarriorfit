@@ -14,7 +14,7 @@ Use these phrases naturally in future references to this post, related blog cont
 
 ## Desk stretch routine
 
-- **Primary keyword:** 2-minute desk stretch routine
+- **Primary keyword:** 2-minute desk stretch routine between meetings
 - **Secondary keywords:** desk stretches for office workers; office stretch break; quick desk stretches
 
 Use the primary phrase naturally in the article title, introduction, and related internal links. Prioritize a safe, useful routine over repeating exact-match phrases.
