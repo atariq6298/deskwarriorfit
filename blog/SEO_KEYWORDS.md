@@ -1,5 +1,12 @@
 # Blog SEO keyword reference
 
+## Desk exercises at work
+
+- **Primary keyword:** desk exercises you can do at your desk
+- **Secondary keywords:** desk exercises; office exercises; seated desk exercises; movement breaks at work
+
+Use these phrases naturally in the desk exercise guide and related internal links. Keep movement suggestions accessible and comfortable; avoid unsupported health claims.
+
 ## Desk stretch routine
 
 - **Primary keyword:** desk stretches for office workers
