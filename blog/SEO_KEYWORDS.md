@@ -14,6 +14,13 @@ Use these phrases naturally in the desk exercise guide and related internal link
 
 Use these phrases naturally in the desk stretch guide and relevant internal links. Keep the advice practical and safe; avoid keyword stuffing or unsupported health claims.
 
+## Workday movement breaks guide
+
+- **Primary keyword:** workday movement breaks
+- **Secondary keywords:** movement breaks at work; desk worker reset routine; micro breaks at work
+
+Use these phrases naturally in the workday movement-breaks guide and related internal links. Keep the advice reachable, specific, and easy to repeat during a real office day.
+
 ## Computer eye strain guide
 
 - **Primary keyword:** computer eye strain
